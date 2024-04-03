@@ -28,15 +28,17 @@ public class ValidAop {
                 bindingResult = (BeanPropertyBindingResult) arg;
             }
         }
-        if(methodName.equals("signup")) {
-            SignupReqDto signupReqDto = null;
-
-            for(Object arg : args) {
-                if(arg.getClass() == SignupReqDto.class) {
-                    signupReqDto = (SignupReqDto) arg;
-                }
-            }
-        }
+        //TODO 예외처리
+//        if(methodName.equals("signup")) {
+//            SignupReqDto signupReqDto = null;
+//
+//            for(Object arg : args) {
+//                if(arg.getClass() == SignupReqDto.class) {
+//                    signupReqDto = (SignupReqDto) arg;
+//                }
+//            }
+//        }
+        return proceedingJoinPoint.proceed();
     }
 
 
