@@ -14,8 +14,8 @@ import java.util.List;
 public class PrincipalUser implements UserDetails {
     private int userId;
     private String username;
-    private String email;
     private String name;
+    private String email;
     private List<SimpleGrantedAuthority> authorities;
 
     @Override
@@ -45,6 +45,6 @@ public class PrincipalUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

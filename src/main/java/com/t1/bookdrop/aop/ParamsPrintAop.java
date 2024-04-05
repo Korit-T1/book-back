@@ -1,7 +1,6 @@
 package com.t1.bookdrop.aop;
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.apache.bcel.classfile.Code;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ParamsPrintAop {
 
-    @Pointcut("@annotation(com.project.bookdrop_back.aop.annotation.ParamsPrintAspect)")
+    @Pointcut("@annotation(com.t1.bookdrop.aop.annotation.ParamsPrintAspect)")
     private void pointCut() {}
 
     @Around("pointCut()")
