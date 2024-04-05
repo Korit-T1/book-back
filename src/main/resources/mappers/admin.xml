@@ -4,8 +4,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.t1.bookdrop.repository.AdminMapper">
-    <resultMap id="AdminResultMap" type="com.t1.bookdrop.entity.Admin">
+<mapper namespace="com.t1.bookDrop.repository.AdminMapper">
+    <resultMap id="AdminResultMap" type="com.t1.bookDrop.entity.Admin">
         <id property="adminId" column="admin_id"/>
         <result property="username" column="username" />
         <result property="password" column="password" />
