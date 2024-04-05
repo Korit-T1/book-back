@@ -1,4 +1,4 @@
-package com.t1.bookdrop;
+package com.t1.bookDrop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
