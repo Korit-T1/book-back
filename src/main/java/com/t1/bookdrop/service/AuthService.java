@@ -1,10 +1,13 @@
 package com.t1.bookdrop.service;
 
+import com.t1.bookdrop.dto.AdminSigninDto;
 import com.t1.bookdrop.dto.SigninReqDto;
 import com.t1.bookdrop.dto.SignupReqDto;
+import com.t1.bookdrop.entity.Admin;
 import com.t1.bookdrop.entity.User;
 import com.t1.bookdrop.exception.SaveException;
 import com.t1.bookdrop.jwt.JwtProvider;
+import com.t1.bookdrop.repository.AdminMapper;
 import com.t1.bookdrop.repository.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,6 +21,9 @@ public class AuthService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private AdminMapper adminMapper;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -54,5 +60,11 @@ public class AuthService {
         }
 
         return jwtProvider.generateToken(user);
+    }
+
+    public String authSignin(AdminSigninDto adminSigninDto) {
+        Admin admin = adminMapper.adminCheckByUsername(adminSigninDto.getUsername());
+
+        return jwtProvider.generateAdminToken(admin);
     }
 }

@@ -1,5 +1,6 @@
 package com.t1.bookdrop.jwt;
 
+import com.t1.bookdrop.entity.Admin;
 import com.t1.bookdrop.entity.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -27,6 +28,21 @@ public class JwtProvider {
 
         String accessToken = Jwts.builder()
                 .claim("userId", userId)
+                .claim("username", username)
+                .setExpiration(expireDate)
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+
+        return accessToken;
+    }
+
+    public String generateAdminToken(Admin admin) {
+        int adminId = admin.getAdminId();
+        String username = admin.getUsername();
+        Date expireDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));
+
+        String accessToken = Jwts.builder()
+                .claim("adminId", adminId)
                 .claim("username", username)
                 .setExpiration(expireDate)
                 .signWith(key, SignatureAlgorithm.HS256)
