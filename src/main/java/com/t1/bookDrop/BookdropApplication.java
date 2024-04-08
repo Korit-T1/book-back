@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BookdropApplication {
+public class BookDropApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BookdropApplication.class, args);
+		SpringApplication.run(BookDropApplication.class, args);
 	}
 
 }
