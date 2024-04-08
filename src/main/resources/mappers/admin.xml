@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.t1.bookDrop.repository.AdminMapper">
+    <resultMap id="AdminResultMap" type="com.t1.bookDrop.entity.Admin">
+        <id property="adminId" column="admin_id"/>
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+    </resultMap>
+
+    <select id="adminCheckByUsername" parameterType="String" resultMap="AdminResultMap">
+        select
+            admin_id,
+            username,
+            password
+        from
+            admin_tb
+        where
+            username = #{username}
+    </select>
+</mapper>
