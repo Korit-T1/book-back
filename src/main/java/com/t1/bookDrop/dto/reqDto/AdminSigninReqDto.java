@@ -1,9 +1,9 @@
-package com.t1.bookDrop.dto;
+package com.t1.bookDrop.dto.reqDto;
 
 import lombok.Data;
 
 @Data
-public class SigninReqDto {
+public class AdminSigninReqDto {
     private String username;
     private String password;
 }

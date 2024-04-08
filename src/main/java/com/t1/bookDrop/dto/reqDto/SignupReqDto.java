@@ -1,4 +1,4 @@
-package com.t1.bookDrop.dto;
+package com.t1.bookDrop.dto.reqDto;
 
 
 import com.t1.bookDrop.entity.User;

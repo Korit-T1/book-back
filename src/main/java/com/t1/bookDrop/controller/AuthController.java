@@ -1,8 +1,8 @@
 package com.t1.bookDrop.controller;
 
 import com.t1.bookDrop.aop.annotation.ValidAspect;
-import com.t1.bookDrop.dto.SigninReqDto;
-import com.t1.bookDrop.dto.SignupReqDto;
+import com.t1.bookDrop.dto.reqDto.SigninReqDto;
+import com.t1.bookDrop.dto.reqDto.SignupReqDto;
 import com.t1.bookDrop.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
