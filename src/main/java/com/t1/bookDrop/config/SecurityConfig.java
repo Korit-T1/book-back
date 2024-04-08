@@ -1,5 +1,6 @@
 package com.t1.bookDrop.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,14 +16,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder passwordEncoder() {
 
         return new BCryptPasswordEncoder();
-
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/server/**", "/auth/**")
+                .antMatchers("/server/**", "/auth/**", "/books/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
