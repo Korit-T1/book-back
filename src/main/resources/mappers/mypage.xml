@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.t1.bookDrop.repository.MyPageMapper">
+
+    <resultMap id="BookResultMap" type="com.t1.bookDrop.entity.Book">
+        <id property="bookId" column="book_id" />
+        <result property="isbn" column="isbn" />
+        <result property="categoryId" column="category_id" />
+        <result property="bookName" column="book_name" />
+        <result property="authorName" column="author_name" />
+        <result property="publisherName" column="publisher_name" />
+        <result property="coverImgUrl" column="cover_img_url" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+        <result property="publishDate" column="publish_date" />
+    </resultMap>
+
+    <resultMap id="BookStockResultMap" type="com.t1.bookDrop.entity.BookStock">
+        <id property="bookStockId" column="book_stock_id"/>
+        <result property="bookId" column="book_id"/>
+        <association property="book" resultMap="BookResultMap" />
+    </resultMap>
+
+    <resultMap id="loanResultMap" type="com.t1.bookDrop.entity.Loan">
+        <id property="loanId" column="loan_id" />
+        <result property="userId" column="user_id" />
+        <result property="bookStockId" column="book_stock_id" />
+        <result property="loanDate" column="loan_date" />
+        <result property="dueDate" column="due_date" />
+        <result property="returnDate" column="return_date" />
+        <association property="bookStock" resultMap="BookStockResultMap" />
+    </resultMap>
+
+    <select id="getLoanHistory" parameterType="string" resultMap="loanResultMap">
+        select
+            lt.loan_id,
+            lt.user_id,
+            lt.book_stock_id,
+            tt.book_name,
+            tt.author_name,
+            tt.publisher_name,
+            lt.loan_date,
+            lt.due_date,
+            lt.return_date
+        from
+            loan_tb lt
+            left outer join user_tb ut on(ut.user_id = lt.user_id)
+            left outer join (
+                select
+                    bst.book_stock_id,
+                    bt.book_id,
+                    bt.book_name,
+                    bt.author_name,
+                    bt.publisher_name
+                from
+                    book_tb bt
+                    left outer join book_stock_tb bst on(bst.book_id = bt.book_id)
+                    ) tt on(tt.book_stock_id = lt.book_stock_id)
+        where
+            ut.username = #{userName};
+    </select>
+</mapper>
