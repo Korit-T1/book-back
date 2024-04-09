@@ -1,8 +1,8 @@
 package com.t1.bookDrop.service;
 
-import com.t1.bookDrop.dto.AdminSigninDto;
-import com.t1.bookDrop.dto.SigninReqDto;
-import com.t1.bookDrop.dto.SignupReqDto;
+import com.t1.bookDrop.dto.reqDto.AdminSigninReqDto;
+import com.t1.bookDrop.dto.reqDto.SigninReqDto;
+import com.t1.bookDrop.dto.reqDto.SignupReqDto;
 import com.t1.bookDrop.entity.Admin;
 import com.t1.bookDrop.entity.User;
 import com.t1.bookDrop.exception.SaveException;
@@ -62,8 +62,8 @@ public class AuthService {
         return jwtProvider.generateToken(user);
     }
 
-    public String authSignin(AdminSigninDto adminSigninDto) {
-        Admin admin = adminMapper.adminCheckByUsername(adminSigninDto.getUsername());
+    public String authSignin(AdminSigninReqDto adminSigninReqDto) {
+        Admin admin = adminMapper.adminCheckByUsername(adminSigninReqDto.getUsername());
 
         return jwtProvider.generateAdminToken(admin);
     }

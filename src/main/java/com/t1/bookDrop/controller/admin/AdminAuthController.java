@@ -1,6 +1,6 @@
 package com.t1.bookDrop.controller.admin;
 
-import com.t1.bookDrop.dto.AdminSigninDto;
+import com.t1.bookDrop.dto.reqDto.AdminSigninReqDto;
 import com.t1.bookDrop.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ public class AdminAuthController {
     private AuthService authService;
 
     @PostMapping("/admin/signin")
-    public ResponseEntity<?> adminSignin (@RequestBody AdminSigninDto adminSigninDto) {
-        return ResponseEntity.ok(authService.authSignin(adminSigninDto));
+    public ResponseEntity<?> adminSignin (@RequestBody AdminSigninReqDto adminSigninReqDto) {
+        return ResponseEntity.ok(authService.authSignin(adminSigninReqDto));
     }
 }

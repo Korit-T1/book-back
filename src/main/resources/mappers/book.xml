@@ -67,7 +67,6 @@
         where
             bt.book_id = #{bookId}
     </select>
-
     <select id="getLoanPossibility" resultMap="LoanResultMap">
         select
             bst.book_id,
