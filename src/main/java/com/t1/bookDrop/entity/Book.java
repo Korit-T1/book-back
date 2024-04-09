@@ -2,6 +2,7 @@ package com.t1.bookDrop.entity;
 
 import com.t1.bookDrop.dto.respDto.SearchBookRespDto;
 
+import com.t1.bookDrop.dto.respDto.mypage.LoanHistoryRespDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Book {
 
     private Category category;
     private Rating rating;
+    private BookStock bookStock;
 
 
     public SearchBookRespDto toSearchBookRespDto() {
@@ -43,4 +45,6 @@ public class Book {
                 .categoryName(category.getCategoryName())
                 .build();
     }
+
+
 }
