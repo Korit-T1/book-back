@@ -9,10 +9,21 @@ import java.util.List;
 
 @Mapper
 public interface BookMapper {
+
+    public int saveBook(Book book);
+
     public List<Book> getBook(
             @Param("bookId") int bookId
     );
+
     public List<Loan> getLoanPossibility(
             @Param("bookId") int bookId
     );
+
+    public int deleteBookByBookIds(List<Integer> bookIds);
+
+    public int updateBookByBookId(Book book);
+
+
+
 }
