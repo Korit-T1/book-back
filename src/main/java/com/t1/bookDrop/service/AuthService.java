@@ -62,8 +62,16 @@ public class AuthService {
         return jwtProvider.generateToken(user);
     }
 
-    public String authSignin(AdminSigninReqDto adminSigninReqDto) {
+    public String adminSignin(AdminSigninReqDto adminSigninReqDto) {
         Admin admin = adminMapper.adminCheckByUsername(adminSigninReqDto.getUsername());
+
+        if(admin == null) {
+            throw new UsernameNotFoundException("관리자 정보를 잘못 입력했습니다.\n다시 입력해주세요.");
+        }
+
+        if(!passwordEncoder.matches(adminSigninReqDto.getPassword(), admin.getPassword())) {
+            throw new BadCredentialsException("관리자 정보를 잘못 입력했습니다.\n다시 입력해주세요.");
+        }
 
         return jwtProvider.generateAdminToken(admin);
     }
