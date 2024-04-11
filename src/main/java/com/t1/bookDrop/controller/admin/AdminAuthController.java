@@ -18,6 +18,6 @@ public class AdminAuthController {
 
     @PostMapping("/admin/signin")
     public ResponseEntity<?> adminSignin (@RequestBody AdminSigninReqDto adminSigninReqDto) {
-        return ResponseEntity.ok(authService.authSignin(adminSigninReqDto));
+        return ResponseEntity.ok(authService.adminSignin(adminSigninReqDto));
     }
 }
