@@ -22,7 +22,7 @@ public class User {
     private String address;
     private String gender;
     private int age;
-    private LocalDate birth;
+    private String birth;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
