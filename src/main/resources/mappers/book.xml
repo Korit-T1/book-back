@@ -48,10 +48,28 @@
         <association property="bookStock" resultMap="BookStockResultMap"/>
     </resultMap>
 
+
+    <insert id="saveBook" parameterType="com.t1.bookDrop.entity.Book">
+        insert into book_tb
+        values(
+            0,
+            #{isbn},
+            #{categoryId},
+            #{bookName},
+            #{authorName},
+            #{publisherName},
+            #{coverImgUrl},
+            now(),
+            now(),
+            now()
+        )
+    </insert>
+
     <select id="getBook" resultMap="BookResultMap">
         select
             bt.book_id,
             bt.isbn,
+
             bt.book_name,
             bt.author_name,
             bt.publisher_name,
@@ -60,6 +78,7 @@
             bt.update_date,
             bt.publish_date,
             ct.category_name
+<!--            rating, category_id, category_name 확인 필요-->
         from
             book_tb bt
             left outer join category_tb ct on(ct.category_id = bt.category_id)
@@ -67,6 +86,7 @@
         where
             bt.book_id = #{bookId}
     </select>
+
     <select id="getLoanPossibility" resultMap="LoanResultMap">
         select
             bst.book_id,
@@ -93,5 +113,36 @@
         where
             bst.book_id = #{bookId}
     </select>
+
+    <delete id="deleteBookByBookIds" parameterType="list">
+        delete
+        from
+            book_tb
+        where
+            book_id in (
+                <foreach collection="bookIds" item="bookId" separator=",">
+                    #{bookId}
+                </foreach>
+            )
+    </delete>
+
+    <update id="updateBookByBookId" parameterType="com.t1.bookDrop.entity.Book">
+        update
+            book_tb
+        set
+            isbn = #{isbn},
+            category_id = #{categoryId},
+            book_name  = #{bookName},
+            author_name = #{authorName},
+            publisher_name = #{publisherName},
+            cover_img_url = #{coverImgUrl},
+            update_date = now()
+        where
+            book_id = #{bookId}
+    </update>
+
+
+
+
 
 </mapper>
