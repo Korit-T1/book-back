@@ -1,6 +1,5 @@
 package com.t1.bookDrop.aop;
 
-import com.t1.bookDrop.dto.reqDto.SigninReqDto;
 import com.t1.bookDrop.dto.reqDto.SignupReqDto;
 import com.t1.bookDrop.exception.ValidException;
 import com.t1.bookDrop.repository.UserMapper;

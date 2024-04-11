@@ -24,7 +24,6 @@ public class BookInfoController {
     @Autowired
     private SearchBookReqDto searchBookReqDto;
 
-
     @GetMapping("/{bookId}")
     public ResponseEntity<List<SearchBookRespDto>> searchBookInfo(@PathVariable int bookId){
         searchBookReqDto.setBookId(bookId);
