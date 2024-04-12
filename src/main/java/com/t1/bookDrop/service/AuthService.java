@@ -1,6 +1,7 @@
 package com.t1.bookDrop.service;
 
 import com.t1.bookDrop.dto.reqDto.AdminSigninReqDto;
+import com.t1.bookDrop.dto.reqDto.OAuth2SignupReqDto;
 import com.t1.bookDrop.dto.reqDto.SigninReqDto;
 import com.t1.bookDrop.dto.reqDto.SignupReqDto;
 import com.t1.bookDrop.entity.Admin;
@@ -46,6 +47,20 @@ public class AuthService {
         successCount += userMapper.saveUser(user);
 
         if(successCount < 1) {
+            throw new SaveException();
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void oAuth2Signup(OAuth2SignupReqDto oAuth2SignupReqDto) {
+        int successCount = 0;
+
+        User user = oAuth2SignupReqDto.toEntity(passwordEncoder);
+
+        successCount += userMapper.saveUser(user);
+        successCount += userMapper.saveOAuth2(oAuth2SignupReqDto.toOAuth2Entity(user.getUserId()));
+
+        if(successCount < 2) {
             throw new SaveException();
         }
     }
