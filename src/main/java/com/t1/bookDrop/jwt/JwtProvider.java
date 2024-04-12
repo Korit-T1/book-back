@@ -9,6 +9,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,9 +32,10 @@ public class JwtProvider {
     }
 
     public String generateToken(User user) {
+
         int userId = user.getUserId();
         String username = user.getUsername();
-        Date expireDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));
+        Date expireDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 20));
 
         String accessToken = Jwts.builder()
                 .claim("userId", userId)
@@ -48,7 +50,7 @@ public class JwtProvider {
     public String generateAdminToken(Admin admin) {
         int adminId = admin.getAdminId();
         String username = admin.getUsername();
-        Date expireDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));
+        Date expireDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 20));
 
         String accessToken = Jwts.builder()
                 .claim("adminId", adminId)
@@ -61,11 +63,10 @@ public class JwtProvider {
     }
 
     public String removeBearer(String token) {
-        if(!StringUtils.hasText(token)) {   // null, 공백, 빈값 전부 체크
+        if(!StringUtils.hasText(token)) {   
             return null;
         }
 
-        // 토큰 제대로 들어오면
         return token.substring("Bearer ".length());
     }
 
@@ -83,17 +84,15 @@ public class JwtProvider {
 
     public Authentication getAuthentication(Claims claims) {
         String username = claims.get("username").toString();
-        User user = userMapper.findUserByUsername(username);
 
+        User user = userMapper.userCheckByUsername(username);
+      
         if(user == null) {
-            // 토큰은 유효하지만 DB에서 유저정보가 삭제되었을 찰나의 경우
             return null;
         }
-
+      
         PrincipalUser principalUser = user.toPrincipalUser();
-
-        return new UsernamePasswordAuthenticationToken(principalUser, principalUser.getPassword(), principalUser.getAuthorities());
-        // 비밀번호 "" 해도 노상관 (앞에서 검증함)
-        // 업캐스팅 리턴
+      
+        return new UsernamePasswordAuthenticationToken(principalUser, principalUser.getPassword());
     }
 }

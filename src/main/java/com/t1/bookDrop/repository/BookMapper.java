@@ -11,6 +11,7 @@ import java.util.List;
 public interface BookMapper {
 
     public int saveBook(Book book);
+    public int saveLoan(Loan loan);
 
     public List<Book> getBook(
             @Param("bookId") int bookId
@@ -24,6 +25,7 @@ public interface BookMapper {
 
     public int updateBookByBookId(Book book);
 
+    public int updateReturnDate(int loanId);
 
 
 }

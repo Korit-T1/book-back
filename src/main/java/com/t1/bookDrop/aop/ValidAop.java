@@ -1,5 +1,6 @@
 package com.t1.bookDrop.aop;
 
+import com.t1.bookDrop.dto.reqDto.OAuth2SignupReqDto;
 import com.t1.bookDrop.dto.reqDto.SignupReqDto;
 import com.t1.bookDrop.exception.ValidException;
 import com.t1.bookDrop.repository.UserMapper;
@@ -51,6 +52,21 @@ public class ValidAop {
             }
 
             if(userMapper.userCheckByUsername(signupReqDto.getUsername()) != null) {
+                ObjectError objectError = new FieldError("username", "username", "이미 사용하는 사용자 이름입니다.");
+                bindingResult.addError(objectError);
+            }
+        }
+
+        if(methodName.equals("oAuth2Signup")) {
+            OAuth2SignupReqDto oAuth2SignupReqDto = null;
+
+            for(Object arg: args) {
+                if(arg.getClass() == OAuth2SignupReqDto.class) {
+                    oAuth2SignupReqDto = (OAuth2SignupReqDto) arg;
+                }
+            }
+
+            if(userMapper.userCheckByUsername(oAuth2SignupReqDto.getUsername()) != null) {
                 ObjectError objectError = new FieldError("username", "username", "이미 사용하는 사용자 이름입니다.");
                 bindingResult.addError(objectError);
             }

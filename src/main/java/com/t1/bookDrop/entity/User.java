@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -27,12 +28,16 @@ public class User {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+    private List<OAuth2> oAuth2s;
+
     public PrincipalUser toPrincipalUser() {
         return PrincipalUser.builder()
                 .userId(userId)
                 .username(username)
                 .name(name)
                 .email(email)
+                .address(address)
+                .phone(phone)
                 .build();
     }
 }

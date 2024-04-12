@@ -3,6 +3,8 @@ package com.t1.bookDrop.config;
 import com.t1.bookDrop.security.exception.AuthEntryPoint;
 import com.t1.bookDrop.security.filter.JwtAuthenticationFilter;
 import com.t1.bookDrop.security.filter.PermitAllFilter;
+import com.t1.bookDrop.security.handler.OAuth2SuccessHandler;
+import com.t1.bookDrop.service.OAuth2PrincipalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthEntryPoint authEntryPoint;
 
+    @Autowired
+    private OAuth2PrincipalService oAuth2PrincipalService;
+
+    @Autowired
+    private OAuth2SuccessHandler oAuth2SuccessHandler;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -36,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/server/**", "/auth/**", "/books/**", "/mypage/**", "/admin/**", "/account/**")
+                .antMatchers("/server/**", "/auth/**", "/books/**", "/mypage/**", "/admin/**", "/account/**", "/loan/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -44,6 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(permitAllFilter, LogoutFilter.class)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
-                .authenticationEntryPoint(authEntryPoint);
+                .authenticationEntryPoint(authEntryPoint)
+                .and()
+                .oauth2Login()
+                .successHandler(oAuth2SuccessHandler)
+                .userInfoEndpoint()
+                .userService(oAuth2PrincipalService);
     }
 }

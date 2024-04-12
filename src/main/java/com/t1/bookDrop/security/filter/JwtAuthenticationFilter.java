@@ -30,26 +30,22 @@ public class JwtAuthenticationFilter extends GenericFilter {
             Claims claims = null;
 
             try {
-                claims = jwtProvider.getClaims(removedBearerToken);         // 토큰으로 claim 가져오기
+                claims = jwtProvider.getClaims(removedBearerToken);    
             } catch (Exception e) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);    // 401 Error (인증 실패)
-//                response.sendError(HttpStatus.UNAUTHORIZED);
-//                response.sendError(401);
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);   
                 return;
             }
 
             Authentication authentication = jwtProvider.getAuthentication(claims);
 
-            if(authentication == null) {                                    // 추출한 claim을 기반으로 인증실패한 경우
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);    // 마찬가지로 인증 실패
+            if(authentication == null) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
-            SecurityContextHolder.getContext().setAuthentication(authentication);   // null 일 때 403 Error
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
-        // 전처리
         filterChain.doFilter(request, response);
-        // 후처리
     }
-
 }

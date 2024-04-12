@@ -1,6 +1,7 @@
 package com.t1.bookDrop.controller;
 
 import com.t1.bookDrop.aop.annotation.ValidAspect;
+import com.t1.bookDrop.dto.reqDto.OAuth2SignupReqDto;
 import com.t1.bookDrop.dto.reqDto.SigninReqDto;
 import com.t1.bookDrop.dto.reqDto.SignupReqDto;
 import com.t1.bookDrop.service.AuthService;
@@ -27,6 +28,13 @@ public class AuthController {
             @Valid @RequestBody SignupReqDto signupReqDto, BindingResult bindingResult
     ) {
         authService.signup(signupReqDto);
+        return ResponseEntity.created(null).body(true);
+    }
+
+    @ValidAspect
+    @PostMapping("/oauth2/signup")
+    public ResponseEntity<?> oAuth2Signup(@Valid @RequestBody OAuth2SignupReqDto oAuth2SignupReqDto, BindingResult bindingResult) {
+        authService.oAuth2Signup(oAuth2SignupReqDto);
         return ResponseEntity.created(null).body(true);
     }
 
