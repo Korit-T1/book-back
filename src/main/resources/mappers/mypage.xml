@@ -34,6 +34,12 @@
         <association property="bookStock" resultMap="BookStockResultMap" />
     </resultMap>
 
+    <resultMap id="WishResultMap" type="com.t1.bookDrop.entity.Wish">
+        <id property="wishId" column="wish_id" />
+        <result property="bookId" column="book_id" />
+        <result property="userId" column="user_id" />
+    </resultMap>
+
     <select id="getLoanHistory" parameterType="string" resultMap="loanResultMap">
         select
             lt.loan_id,
@@ -60,6 +66,18 @@
                     left outer join book_stock_tb bst on(bst.book_id = bt.book_id)
                     ) tt on(tt.book_stock_id = lt.book_stock_id)
         where
-            ut.username = #{userName};
+            ut.username = #{username};
     </select>
+
+    <select id="getWishList" parameterType="string" resultMap="WishResultMap">
+        select
+            wt.wish_id,
+            wt.book_id,
+            ut.user_id
+        from
+            wish_tb wt
+            left outer join user_tb ut on(ut.username = #{username})
+    </select>
+
+
 </mapper>
