@@ -1,6 +1,5 @@
-package com.study.library.security.exception;
+package com.t1.bookDrop.security.exception;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

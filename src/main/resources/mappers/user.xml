@@ -44,4 +44,24 @@
         where
             username = #{username}
     </select>
+
+    <select id="findUserByUsername" parameterType="string" resultMap="UserResultMap">
+        select
+            *
+        from
+            user_tb
+        where
+            username = #{username}
+    </select>
+
+    <update id="modifyPassword" parameterType="com.t1.bookDrop.entity.User">
+        update
+            user_tb
+        set
+            password = #{password},
+            update_date = now()
+        where
+            user_id = #{userId}
+    </update>
+
 </mapper>

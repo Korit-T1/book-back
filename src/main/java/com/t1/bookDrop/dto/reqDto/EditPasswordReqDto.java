@@ -1,4 +1,4 @@
-package com.study.library.dto;
+package com.t1.bookDrop.dto.reqDto;
 
 import lombok.Data;
 

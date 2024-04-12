@@ -1,5 +1,6 @@
 package com.t1.bookDrop.entity;
 
+import com.t1.bookDrop.security.PrincipalUser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,4 +27,12 @@ public class User {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+    public PrincipalUser toPrincipalUser() {
+        return PrincipalUser.builder()
+                .userId(userId)
+                .username(username)
+                .name(name)
+                .email(email)
+                .build();
+    }
 }

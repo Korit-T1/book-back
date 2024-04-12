@@ -1,11 +1,8 @@
-package com.study.library.security.filter;
+package com.t1.bookDrop.security.filter;
 
-import ch.qos.logback.core.CoreConstants;
-import com.study.library.jwt.JwtProvider;
+import com.t1.bookDrop.jwt.JwtProvider;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -27,7 +24,6 @@ public class JwtAuthenticationFilter extends GenericFilter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         Boolean isPermitAll = (Boolean) request.getAttribute("isPermitAll");
-
         if(!isPermitAll) {
             String accessToken = request.getHeader("Authorization");
             String removedBearerToken = jwtProvider.removeBearer(accessToken);
@@ -48,7 +44,6 @@ public class JwtAuthenticationFilter extends GenericFilter {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);    // 마찬가지로 인증 실패
                 return;
             }
-
             SecurityContextHolder.getContext().setAuthentication(authentication);   // null 일 때 403 Error
         }
 
