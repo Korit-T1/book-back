@@ -21,6 +21,7 @@ public class Book {
     private String authorName;
     private String publisherName;
     private String coverImgUrl;
+
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
     private LocalDateTime publishDate;

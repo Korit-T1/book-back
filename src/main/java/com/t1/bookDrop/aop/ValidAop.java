@@ -1,6 +1,6 @@
 package com.t1.bookDrop.aop;
 
-import com.t1.bookDrop.dto.reqDto.SigninReqDto;
+import com.t1.bookDrop.dto.reqDto.SignupReqDto;
 import com.t1.bookDrop.exception.ValidException;
 import com.t1.bookDrop.repository.UserMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -42,15 +42,15 @@ public class ValidAop {
         }
 
         if(methodName.equals("signup")) {
-             SigninReqDto signinReqDto = null;
+             SignupReqDto signupReqDto = null;
 
             for(Object arg : args) {
-                if(arg.getClass() == SigninReqDto.class) {
-                    signinReqDto = (SigninReqDto) arg;
+                if(arg.getClass() == SignupReqDto.class) {
+                    signupReqDto = (SignupReqDto) arg;
                 }
             }
 
-            if(userMapper.userCheckByUsername(signinReqDto.getUsername()) != null) {
+            if(userMapper.userCheckByUsername(signupReqDto.getUsername()) != null) {
                 ObjectError objectError = new FieldError("username", "username", "이미 사용하는 사용자 이름입니다.");
                 bindingResult.addError(objectError);
             }
