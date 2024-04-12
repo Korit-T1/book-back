@@ -22,7 +22,7 @@ public class BookInfoService {
     private BookMapper bookMapper;
 
 
-        @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public void saveBook(RegisterBookReqDto registerBookReqDto) {
         bookMapper.saveBook(registerBookReqDto.toEntity());
     }
