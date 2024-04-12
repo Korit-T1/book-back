@@ -64,6 +64,17 @@
             now()
         )
     </insert>
+    <insert id="saveLoan" parameterType="com.t1.bookDrop.entity.Book">
+        insert into loan_tb
+        values(
+            0,
+            #{userId},
+            #{bookStockId},
+            now(),
+            DATE_ADD(now(), INTERVAL 7 DAY),
+            null
+        )
+    </insert>
 
     <select id="getBook" resultMap="BookResultMap">
         select
@@ -140,7 +151,14 @@
         where
             book_id = #{bookId}
     </update>
-
+    <update id="updateReturnDate" parameterType="int">
+        update
+            loan_tb
+        set
+            return_date = now()
+        where
+            loan_id = #{loanId}
+    </update>
 
 
 
