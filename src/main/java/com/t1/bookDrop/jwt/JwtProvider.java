@@ -20,7 +20,6 @@ import org.springframework.util.StringUtils;
 import java.security.Key;
 import java.util.Date;
 
-@Slf4j
 @Component
 public class JwtProvider {
 

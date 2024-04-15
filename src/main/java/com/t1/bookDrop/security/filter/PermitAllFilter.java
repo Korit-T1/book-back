@@ -24,6 +24,7 @@ public class PermitAllFilter extends GenericFilter {
 
         String uri = request.getRequestURI();
         request.setAttribute("isPermitAll", false);
+
         for(String antMatcher : antMatchers) {
             if(uri.startsWith(antMatcher)) {
                 request.setAttribute("isPermitAll", true);
