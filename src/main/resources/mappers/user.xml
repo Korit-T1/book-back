@@ -53,6 +53,25 @@
             username = #{username}
     </select>
 
+    <select id="findUserByUsername" parameterType="string" resultMap="UserResultMap">
+        select
+            *
+        from
+            user_tb
+        where
+            username = #{username}
+    </select>
+
+    <update id="modifyPassword" parameterType="com.t1.bookDrop.entity.User">
+        update
+            user_tb
+        set
+            password = #{password},
+            update_date = now()
+        where
+            user_id = #{userId}
+    </update>
+
     <select id="userCheckByOAuth2name" resultMap="UserResultMap">
         select
             ut.user_id,
@@ -81,5 +100,6 @@
         insert into oauth2_tb
         values(0, #{oAuth2Name}, #{userId}, #{providerName}, now(), now())
     </insert>
+
 
 </mapper>

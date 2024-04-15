@@ -36,15 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-
         return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.cors();
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/server/**", "/auth/**", "/books/**", "/mypage/**", "/admin/**", "/loan/**")
+                .antMatchers("/server/**", "/auth/**", "/books/**", "/mypage/**", "/admin/**", "/account/**", "/loan/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

@@ -9,7 +9,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,13 +24,9 @@ import java.util.Date;
 public class JwtProvider {
 
     private final Key key;
-
     private UserMapper userMapper;
 
-    private JwtProvider(
-            @Value("${jwt.secret}") String secret,
-            @Autowired UserMapper userMapper
-    ) {
+    private JwtProvider(@Value("${jwt.secret}") String secret, @Autowired UserMapper userMapper) {
         key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
         this.userMapper = userMapper;
     }
@@ -67,32 +63,36 @@ public class JwtProvider {
     }
 
     public String removeBearer(String token) {
-        if(!StringUtils.hasText(token)) {
+        if(!StringUtils.hasText(token)) {   
             return null;
         }
-        return token.substring("bearer ".length());
+
+        return token.substring("Bearer ".length());
     }
 
     public Claims getClaims(String token) {
-
         Claims claims = null;
 
         claims = Jwts.parserBuilder()
-            .setSigningKey(key)
-            .build()
-            .parseClaimsJws(token)
-            .getBody();
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
 
         return claims;
     }
 
     public Authentication getAuthentication(Claims claims) {
         String username = claims.get("username").toString();
+
         User user = userMapper.userCheckByUsername(username);
+      
         if(user == null) {
             return null;
         }
+      
         PrincipalUser principalUser = user.toPrincipalUser();
+      
         return new UsernamePasswordAuthenticationToken(principalUser, principalUser.getPassword());
     }
 }
