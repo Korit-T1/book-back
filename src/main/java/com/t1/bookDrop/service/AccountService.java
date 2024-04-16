@@ -27,7 +27,7 @@ public class AccountService {
 
     public void editPassword(EditPasswordReqDto editPasswordReqDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userMapper.findUserByUsername(authentication.getName());
+        User user = userMapper.userCheckByUsername(authentication.getName());
         System.out.println(user.getPassword());
         System.out.println(editPasswordReqDto.getOldPassword());
 

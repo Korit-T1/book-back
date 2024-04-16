@@ -46,6 +46,7 @@ public class AuthController {
 
     @PostMapping("/oauth2/merge")
     public ResponseEntity<?> oAuth2Merge(@RequestBody OAuth2MergeReqDto oAuth2MergeReqDto) {
-        authService
+        authService.oAuth2Merge(oAuth2MergeReqDto);
+        return ResponseEntity.ok(true);
     }
 }
