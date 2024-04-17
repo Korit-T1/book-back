@@ -24,15 +24,20 @@ public class JwtAuthenticationFilter extends GenericFilter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         Boolean isPermitAll = (Boolean) request.getAttribute("isPermitAll");
+        System.out.println("isPermitAll: " + isPermitAll);
+
         if(!isPermitAll) {
             String accessToken = request.getHeader("Authorization");
             String removedBearerToken = jwtProvider.removeBearer(accessToken);
+            System.out.println("removedBearerToken: " + removedBearerToken);
             Claims claims = null;
 
             try {
                 claims = jwtProvider.getClaims(removedBearerToken);    
             } catch (Exception e) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);   
+                System.out.println(claims);
+                System.out.println("claims 오류");
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
 
@@ -42,7 +47,7 @@ public class JwtAuthenticationFilter extends GenericFilter {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
-
+            System.out.println(authentication);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 

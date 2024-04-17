@@ -1,8 +1,5 @@
-package com.t1.bookDrop.controller;
+package com.t1.bookDrop.controller.admin;
 
-//import com.study.library.aop.annotation.ValidAspect;
-//import com.study.library.dto.EditPasswordReqDto;
-//import com.study.library.security.PrincipalUser;
 import com.t1.bookDrop.aop.annotation.ValidAspect;
 import com.t1.bookDrop.dto.reqDto.EditPasswordReqDto;
 import com.t1.bookDrop.security.PrincipalUser;
@@ -15,10 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
-@RequestMapping("/account")
+@RequestMapping("/admin")
 @RestController
-public class AccountController {
+public class AdminPrincipalController {
 
     @Autowired
     private AccountService accountService;
@@ -38,4 +34,5 @@ public class AccountController {
 
         return ResponseEntity.ok(true);
     }
+
 }

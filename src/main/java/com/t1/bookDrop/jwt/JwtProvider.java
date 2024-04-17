@@ -2,6 +2,7 @@ package com.t1.bookDrop.jwt;
 
 import com.t1.bookDrop.entity.Admin;
 import com.t1.bookDrop.entity.User;
+import com.t1.bookDrop.repository.AdminMapper;
 import com.t1.bookDrop.repository.UserMapper;
 import com.t1.bookDrop.security.PrincipalUser;
 import io.jsonwebtoken.Claims;
@@ -25,14 +26,17 @@ public class JwtProvider {
 
     private final Key key;
     private UserMapper userMapper;
+    private AdminMapper adminMapper;
 
-    private JwtProvider(@Value("${jwt.secret}") String secret, @Autowired UserMapper userMapper) {
+    private JwtProvider(@Value("${jwt.secret}") String secret,
+                        @Autowired UserMapper userMapper,
+                        @Autowired AdminMapper adminMapper) {
         key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
         this.userMapper = userMapper;
+        this.adminMapper = adminMapper;
     }
 
     public String generateToken(User user) {
-
         int userId = user.getUserId();
         String username = user.getUsername();
         Date expireDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 20));
@@ -85,14 +89,28 @@ public class JwtProvider {
     public Authentication getAuthentication(Claims claims) {
         String username = claims.get("username").toString();
 
-        User user = userMapper.userCheckByUsername(username);
-      
-        if(user == null) {
-            return null;
+        System.out.println(username);
+
+        if(username.contains("admin")) {
+            Admin admin = adminMapper.adminCheckByUsername(username);
+
+            if (admin == null) return null;
+            PrincipalUser principalAdmin = admin.toPrincipalAdmin();
+            return new UsernamePasswordAuthenticationToken(
+                    principalAdmin,
+                    principalAdmin.getPassword(),
+                    principalAdmin.getAuthorities()
+            );
+        }else {
+            User user = userMapper.userCheckByUsername(username);
+
+            if (user == null) return null;
+            PrincipalUser principalUser = user.toPrincipalUser();
+            return new UsernamePasswordAuthenticationToken(
+                    principalUser,
+                    principalUser.getPassword(),
+                    principalUser.getAuthorities()
+            );
         }
-      
-        PrincipalUser principalUser = user.toPrincipalUser();
-      
-        return new UsernamePasswordAuthenticationToken(principalUser, principalUser.getPassword());
     }
 }

@@ -23,8 +23,8 @@ public class MypageService {
         return loan.stream().map(Loan::toLoanHistoryRespDto).collect(Collectors.toList());
     }
 
-    public List<Wish> getWishData(String username) {
-        List<Wish> wishList = myPageMapper.getWishList(username);
+    public List<Wish> getWishData(int userid) {
+        List<Wish> wishList = myPageMapper.getWishList(userid);
 
         return wishList;
     }
