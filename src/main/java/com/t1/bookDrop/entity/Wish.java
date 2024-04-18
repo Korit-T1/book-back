@@ -13,4 +13,6 @@ public class Wish {
     private int wishId;
     private int bookId;
     private int userId;
+
+    private Book book;
 }

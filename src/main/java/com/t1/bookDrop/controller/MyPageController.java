@@ -20,8 +20,8 @@ public class MyPageController {
         return ResponseEntity.ok().body(mypageService.getLoanData(username));
     }
 
-    @GetMapping("/wish/{username}")
-    public ResponseEntity<?> getWishList(@PathVariable String username) {
-        return ResponseEntity.ok().body(mypageService.getWishData(username));
+    @GetMapping("/wish/{userid}")
+    public ResponseEntity<?> getWishList(@PathVariable int userid) {
+        return ResponseEntity.ok().body(mypageService.getWishData(userid));
     }
 }

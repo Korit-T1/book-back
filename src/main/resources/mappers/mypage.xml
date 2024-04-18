@@ -38,6 +38,7 @@
         <id property="wishId" column="wish_id" />
         <result property="bookId" column="book_id" />
         <result property="userId" column="user_id" />
+        <association property="book" resultMap="BookResultMap" />
     </resultMap>
 
     <select id="getLoanHistory" parameterType="string" resultMap="loanResultMap">
@@ -69,14 +70,18 @@
             ut.username = #{username};
     </select>
 
-    <select id="getWishList" parameterType="string" resultMap="WishResultMap">
+    <select id="getWishList" parameterType="int" resultMap="WishResultMap">
         select
             wt.wish_id,
-            wt.book_id,
-            ut.user_id
+            bt.book_name,
+            bt.author_name,
+            bt.publisher_name,
+            bt.cover_img_url
         from
             wish_tb wt
-            left outer join user_tb ut on(ut.username = #{username})
+            left outer join book_tb bt on(bt.book_id = wt.book_id)
+        where
+            user_id = #{userid};
     </select>
 
 

@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper
 public interface MyPageMapper {
     public List<Loan> getLoanHistory(String username);
-    public List<Wish> getWishList(String username);
+    public List<Wish> getWishList(int userid);
 }
