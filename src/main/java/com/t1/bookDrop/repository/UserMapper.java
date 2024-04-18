@@ -10,7 +10,6 @@ public interface UserMapper {
     public int saveUser(User user);
     public User userCheckByOAuth2name(String oAuth2name);
     public int saveOAuth2(OAuth2 oAuth2);
-    public User findUserByUsername(String username);
     public int modifyPassword(User user);
     // userCheck, findUserByUsername 확인 필요
 }
