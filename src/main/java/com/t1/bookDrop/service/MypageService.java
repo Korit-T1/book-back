@@ -20,8 +20,10 @@ public class MypageService {
     public List<LoanHistoryRespDto> getLoanData(String username) {
         List<Loan> loan = myPageMapper.getLoanHistory(username);
 
-        return loan.stream().map(Loan::toLoanHistoryRespDto).collect(Collectors.toList());
+//        return loan.stream().map(Loan::toLoanHistoryRespDto).collect(Collectors.toList());
+        return null;
     }
+
 
     public List<Wish> getWishData(int userid) {
         List<Wish> wishList = myPageMapper.getWishList(userid);

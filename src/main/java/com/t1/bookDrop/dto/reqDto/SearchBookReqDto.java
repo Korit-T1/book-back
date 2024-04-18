@@ -4,8 +4,8 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Data
-@Component
 public class SearchBookReqDto {
-    public int bookId;
-
+    private int page;
+    private int option;
+    private String text;
 }

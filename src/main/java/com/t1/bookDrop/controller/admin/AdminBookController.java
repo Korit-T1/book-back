@@ -28,16 +28,16 @@ public class AdminBookController {
 
     @ParamsPrintAspect
     @ValidAspect
-    @PostMapping("/book/save")
+    @PostMapping("/book")
     public ResponseEntity<?> saveBook( @Valid @RequestBody RegisterBookReqDto registerBookReqDto, BindingResult bindingResult) {
         bookInfoService.saveBook(registerBookReqDto);
         return ResponseEntity.created(null).body(true);
     }
 
 
-    @GetMapping("/book/search")
-    public ResponseEntity<?> searchBookInfo(SearchBookReqDto searchBookReqDto) {
-        return ResponseEntity.ok(bookInfoService.searchBookInfo(searchBookReqDto    ));
+    @GetMapping("/book/{bookId}")
+    public ResponseEntity<?> searchBookInfo(@PathVariable int bookId) {
+        return ResponseEntity.ok(bookInfoService.searchBookInfo(bookId));
     }
 
 
@@ -48,7 +48,7 @@ public class AdminBookController {
 
 
 
-    @DeleteMapping("/book/delete")
+    @DeleteMapping("/book")
     public  ResponseEntity<?> deleteBook(@RequestBody List<Integer> bookIds) {
         bookInfoService.deleteBook(bookIds);
         return ResponseEntity.ok(true);
@@ -56,7 +56,7 @@ public class AdminBookController {
 
 
     @ParamsPrintAspect
-    @PutMapping("/book/update/{bookId}")
+    @PutMapping("/book/{bookId}")
     public ResponseEntity<?> updateBook(
             @PathVariable int bookId,
             @RequestBody UpdateBookReqDto updateBookReqDto) {

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -28,20 +29,18 @@ public class Book {
 
     private Category category;
     private Rating rating;
-    private BookStock bookStock;
-
 
     public SearchBookRespDto toSearchBookRespDto() {
         return SearchBookRespDto.builder()
                 .bookId(bookId)
                 .isbn(isbn)
                 .categoryId(categoryId)
+                .categoryName(category.getCategoryName())
                 .bookName(bookName)
                 .authorName(authorName)
                 .publisherName(publisherName)
                 .coverImgUrl(coverImgUrl)
                 .publishDate(publishDate)
-                .categoryName(category.getCategoryName())
                 .build();
     }
 

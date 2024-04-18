@@ -13,11 +13,11 @@ public class SearchBookRespDto {
     private int bookId;
     private String isbn;
     private int categoryId;
+    private String categoryName;
     private String bookName;
     private String authorName;
     private String publisherName;
     private String coverImgUrl;
-    private String categoryName;
     private LocalDateTime publishDate;
 
 }

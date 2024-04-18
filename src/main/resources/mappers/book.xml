@@ -35,6 +35,8 @@
     <resultMap id="BookStockResultMap" type="com.t1.bookDrop.entity.BookStock">
         <id property="bookStockId" column="book_stock_id"/>
         <result property="bookId" column="book_id"/>
+        <result property="loanStatus" column="loan_status"/>
+        <association property="loan" resultMap="LoanResultMap" />
     </resultMap>
 
     <resultMap id="LoanResultMap" type="com.t1.bookDrop.entity.Loan">
@@ -44,8 +46,6 @@
         <result property="loanDate" column="loan_date" />
         <result property="dueDate" column="due_date"/>
         <result property="returnDate" column="return_date"/>
-        <result property="loanStatus" column="loan_status"/>
-        <association property="bookStock" resultMap="BookStockResultMap"/>
     </resultMap>
 
 
@@ -80,7 +80,6 @@
         select
             bt.book_id,
             bt.isbn,
-
             bt.book_name,
             bt.author_name,
             bt.publisher_name,
@@ -98,7 +97,7 @@
             bt.book_id = #{bookId}
     </select>
 
-    <select id="getLoanPossibility" resultMap="LoanResultMap">
+    <select id="findBookStocksByBookId" resultMap="BookStockResultMap">
         select
             bst.book_id,
             bst.book_stock_id,
@@ -151,7 +150,7 @@
         where
             book_id = #{bookId}
     </update>
-    <update id="updateReturnDate" parameterType="int">
+    <update id="updateReturnDate" parameterType="int"> //반납일자 업데이트
         update
             loan_tb
         set
@@ -161,6 +160,40 @@
     </update>
 
 
-
+    <select id="findBooksAll" resultMap="BookResultMap">
+        select
+            bt.book_id,
+            bt.isbn,
+            bt.book_name,
+            bt.author_name,
+            bt.publisher_name,
+            bt.cover_img_url,
+            bt.create_date,
+            bt.update_date,
+            bt.publish_date,
+            ct.category_name
+        from
+            book_tb bt
+            left outer join category_tb ct on(ct.category_id = bt.category_id)
+        where
+            1 = 1
+            <if test="option == 0">
+                and (
+                    bt.book_name like concat("%", #{text}, "%")
+                    or bt.author_name like concat("%", #{text}, "%")
+                    or bt.publisher_name like concat("%", #{text}, "%")
+                )
+            </if>
+            <if test="option == 1">
+                and bt.book_name like concat("%", #{text}, "%")
+            </if>
+            <if test="option == 2">
+                and bt.author_name like concat("%", #{text}, "%")
+            </if>
+            <if test="option == 3">
+                and bt.publisher_name like concat("%", #{text}, "%")
+            </if>
+        limit #{index}, 20
+    </select>
 
 </mapper>
