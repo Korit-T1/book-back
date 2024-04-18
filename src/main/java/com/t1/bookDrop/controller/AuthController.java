@@ -1,6 +1,7 @@
 package com.t1.bookDrop.controller;
 
 import com.t1.bookDrop.aop.annotation.ValidAspect;
+import com.t1.bookDrop.dto.reqDto.OAuth2MergeReqDto;
 import com.t1.bookDrop.dto.reqDto.OAuth2SignupReqDto;
 import com.t1.bookDrop.dto.reqDto.SigninReqDto;
 import com.t1.bookDrop.dto.reqDto.SignupReqDto;
@@ -41,5 +42,11 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> signin (@RequestBody SigninReqDto signinReqDto) {
         return ResponseEntity.ok(authService.signin(signinReqDto));
+    }
+
+    @PostMapping("/oauth2/merge")
+    public ResponseEntity<?> oAuth2Merge(@RequestBody OAuth2MergeReqDto oAuth2MergeReqDto) {
+        authService.oAuth2Merge(oAuth2MergeReqDto);
+        return ResponseEntity.ok(true);
     }
 }

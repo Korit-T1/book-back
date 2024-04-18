@@ -1,10 +1,8 @@
 package com.t1.bookDrop.service;
 
-import com.t1.bookDrop.dto.reqDto.AdminSigninReqDto;
-import com.t1.bookDrop.dto.reqDto.OAuth2SignupReqDto;
-import com.t1.bookDrop.dto.reqDto.SigninReqDto;
-import com.t1.bookDrop.dto.reqDto.SignupReqDto;
+import com.t1.bookDrop.dto.reqDto.*;
 import com.t1.bookDrop.entity.Admin;
+import com.t1.bookDrop.entity.OAuth2;
 import com.t1.bookDrop.entity.User;
 import com.t1.bookDrop.exception.SaveException;
 import com.t1.bookDrop.jwt.JwtProvider;
@@ -96,5 +94,23 @@ public class AuthService {
         return jwtProvider.generateAdminToken(admin);
     }
 
+    public void oAuth2Merge(OAuth2MergeReqDto oAuth2MergeReqDto) {
+        User user = userMapper.userCheckByUsername(oAuth2MergeReqDto.getUsername());
 
+        if(user == null) {
+            throw new UsernameNotFoundException("사용자 정보를 확인할 수 없습니다.");
+        }
+
+        if(!passwordEncoder.matches(oAuth2MergeReqDto.getPassword(), user.getPassword())) {
+            throw new BadCredentialsException("사용자 정보를 확인할 수 없습니다.");
+        }
+
+        OAuth2 oAuth2 = OAuth2.builder()
+                .oAuth2Name(oAuth2MergeReqDto.getOauth2Name())
+                .userId(user.getUserId())
+                .providerName(oAuth2MergeReqDto.getProviderName())
+                .build();
+
+        userMapper.saveOAuth2(oAuth2);
+    }
 }
