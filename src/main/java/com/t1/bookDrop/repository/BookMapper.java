@@ -21,6 +21,8 @@ public interface BookMapper {
             @Param("bookId") int bookId
     );
 
+    public List<Book> getBookList();
+
     public int deleteBookByBookIds(List<Integer> bookIds);
 
     public int updateBookByBookId(Book book);
