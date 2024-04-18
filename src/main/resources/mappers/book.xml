@@ -98,6 +98,26 @@
             bt.book_id = #{bookId}
     </select>
 
+    <select id="getBookList" resultMap="BookResultMap">
+        select
+        bt.book_id,
+        bt.isbn,
+
+        bt.book_name,
+        bt.author_name,
+        bt.publisher_name,
+        bt.cover_img_url,
+        bt.create_date,
+        bt.update_date,
+        bt.publish_date,
+        ct.category_name
+        <!--            rating, category_id, category_name 확인 필요-->
+        from
+        book_tb bt
+        left outer join category_tb ct on(ct.category_id = bt.category_id)
+        left outer join book_rating_tb brt on (brt.book_id = bt.book_id)
+    </select>
+
     <select id="getLoanPossibility" resultMap="LoanResultMap">
         select
             bst.book_id,

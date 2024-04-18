@@ -34,12 +34,16 @@ public class BookInfoService {
         return bookInfo.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
     }
 
-
     public List<LoanPossibilityRespDto> searchLoanPossibility(SearchBookReqDto searchBookReqDto) {
         List<Loan> loanInfo = bookMapper.getLoanPossibility(
                 searchBookReqDto.getBookId()
         );
         return loanInfo.stream().map(Loan::toLoanPossibilityRespDto).collect(Collectors.toList());
+    }
+
+    public List<SearchBookRespDto> searchBookList() {
+        List<Book> bookList = bookMapper.getBookList();
+        return bookList.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
     }
 
 
@@ -51,9 +55,6 @@ public class BookInfoService {
     @Transactional(rollbackFor = Exception.class)
     public void updateBook(UpdateBookReqDto updateBookReqDto) {
         bookMapper.updateBookByBookId(updateBookReqDto.toEntity());
-
-
-
     }
 
 }
