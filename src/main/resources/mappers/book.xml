@@ -76,7 +76,7 @@
         )
     </insert>
 
-    <select id="getBook" resultMap="BookResultMap">
+    <select id="getBook" resultMap="BookResultMap"> <!-- 기능 확인 -->
         select
             bt.book_id,
             bt.isbn,
@@ -95,6 +95,66 @@
             left outer join book_rating_tb brt on (brt.book_id = bt.book_id)
         where
             bt.book_id = #{bookId}
+    </select>
+
+    <select id="findBooksAll" resultMap="BookResultMap">
+        select
+            bt.book_id,
+            bt.isbn,
+            bt.book_name,
+            bt.author_name,
+            bt.publisher_name,
+            bt.cover_img_url,
+            bt.create_date,
+            bt.update_date,
+            bt.publish_date,
+            ct.category_name
+        from
+            book_tb bt
+            left outer join category_tb ct on(ct.category_id = bt.category_id)
+        where
+        1 = 1
+            <if test="option == 0">
+                and (
+                bt.book_name like concat("%", #{text}, "%")
+                or bt.author_name like concat("%", #{text}, "%")
+                or bt.publisher_name like concat("%", #{text}, "%")
+                )
+            </if>
+            <if test="option == 1">
+                and bt.book_name like concat("%", #{text}, "%")
+            </if>
+            <if test="option == 2">
+                and bt.author_name like concat("%", #{text}, "%")
+            </if>
+            <if test="option == 3">
+                and bt.publisher_name like concat("%", #{text}, "%")
+            </if>
+        limit #{index}, 20
+    </select>
+
+    <select id="getBookCount" resultType="integer">
+        select
+            count(*)
+        from
+            book_tb bt
+            left outer join category_tb ct on (ct.category_id = bt.category_id)
+        <choose>
+            <when test="option == 0">
+                where bt.book_name like concat('%', #{text}, '%')
+                or bt.author_name like concat('%', #{text}, '%')
+                or bt.publisher_name like concat('%', #{text}, '%')
+            </when>
+            <when test="option == 1">
+                where bt.book_name like concat('%', #{text}, '%')
+            </when>
+            <when test="option == 2">
+                where bt.author_name like concat('%', #{text}, '%')
+            </when>
+            <when test="option == 3">
+                where bt.publisher_name like concat('%', #{text}, '%')
+            </when>
+        </choose>
     </select>
 
     <select id="findBookStocksByBookId" resultMap="BookStockResultMap">
@@ -150,6 +210,7 @@
         where
             book_id = #{bookId}
     </update>
+
     <update id="updateReturnDate" parameterType="int"> //반납일자 업데이트
         update
             loan_tb
@@ -158,42 +219,5 @@
         where
             loan_id = #{loanId}
     </update>
-
-
-    <select id="findBooksAll" resultMap="BookResultMap">
-        select
-            bt.book_id,
-            bt.isbn,
-            bt.book_name,
-            bt.author_name,
-            bt.publisher_name,
-            bt.cover_img_url,
-            bt.create_date,
-            bt.update_date,
-            bt.publish_date,
-            ct.category_name
-        from
-            book_tb bt
-            left outer join category_tb ct on(ct.category_id = bt.category_id)
-        where
-            1 = 1
-            <if test="option == 0">
-                and (
-                    bt.book_name like concat("%", #{text}, "%")
-                    or bt.author_name like concat("%", #{text}, "%")
-                    or bt.publisher_name like concat("%", #{text}, "%")
-                )
-            </if>
-            <if test="option == 1">
-                and bt.book_name like concat("%", #{text}, "%")
-            </if>
-            <if test="option == 2">
-                and bt.author_name like concat("%", #{text}, "%")
-            </if>
-            <if test="option == 3">
-                and bt.publisher_name like concat("%", #{text}, "%")
-            </if>
-        limit #{index}, 20
-    </select>
 
 </mapper>
