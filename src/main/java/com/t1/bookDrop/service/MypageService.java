@@ -2,6 +2,7 @@ package com.t1.bookDrop.service;
 
 import com.t1.bookDrop.dto.reqDto.UpdateProfileImageReqDto;
 import com.t1.bookDrop.dto.respDto.mypage.LoanHistoryRespDto;
+import com.t1.bookDrop.dto.respDto.mypage.WishListRespDto;
 import com.t1.bookDrop.entity.Book;
 import com.t1.bookDrop.entity.Loan;
 import com.t1.bookDrop.entity.Wish;
@@ -24,10 +25,10 @@ public class MypageService {
         return loans.stream().map(Loan::toRespDto).collect(Collectors.toList());
     }
 
-    public List<Wish> getWishData(int userid) {
+    public List<WishListRespDto> getWishData(int userid) {
         List<Wish> wishList = myPageMapper.getWishList(userid);
 
-        return wishList;
+        return wishList.stream().map(Wish::toRespDto).collect(Collectors.toList());
     }
 
     public int updateProfileImage(UpdateProfileImageReqDto updateProfileImageReqDto) {

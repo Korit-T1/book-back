@@ -57,6 +57,7 @@
             bt.book_name,
             bt.author_name,
             bt.publisher_name,
+            bt.cover_img_url,
             lt.loan_date,
             lt.due_date,
             lt.return_date

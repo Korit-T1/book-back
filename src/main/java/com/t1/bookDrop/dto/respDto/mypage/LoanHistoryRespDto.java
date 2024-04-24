@@ -15,6 +15,7 @@ public class LoanHistoryRespDto {
     private String bookName;
     private String authorName;
     private String publisherName;
+    private String imageUrl;
     private LocalDateTime loanDate;
     private LocalDateTime dueDate;
     private LocalDateTime returnDate;

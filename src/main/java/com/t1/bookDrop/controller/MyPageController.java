@@ -13,12 +13,12 @@ public class MyPageController {
     @Autowired
     private MypageService mypageService;
 
-    @GetMapping("/getLoan/{userid}")
+    @GetMapping("/loan/{userid}")
     public ResponseEntity<?> getLoanList(@PathVariable int userid) {
         return ResponseEntity.ok().body(mypageService.getLoanData(userid));
     }
 
-    @GetMapping("/wish")
+    @GetMapping("/wish/{userid}")
     public ResponseEntity<?> getWishList(@PathVariable int userid) {
         return ResponseEntity.ok().body(mypageService.getWishData(userid));
     }
