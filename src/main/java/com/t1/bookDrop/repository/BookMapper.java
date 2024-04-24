@@ -14,9 +14,20 @@ public interface BookMapper {
     public int saveBook(Book book);
     public int saveLoan(Loan loan);
 
-    public List<Book> getBook(
+    public List<Book> getBook( // 기능 확인
             @Param("bookId") int bookId
     );
+
+    public List<Book> findBooksAll(
+            @Param("index") int index,
+            @Param("count") int count,
+            @Param("option")int option,
+            @Param("text")String text);
+
+
+    public int getBookCount(
+            @Param("option") int option,
+            @Param("text") String text);
 
     public int deleteBookByBookIds(List<Integer> bookIds);
 
@@ -24,6 +35,7 @@ public interface BookMapper {
 
     public int updateReturnDate(int loanId);
 
-    public List<Book> findBooksAll(@Param("index") int index, @Param("option")int option, @Param("text")String text);
+
+
     public List<BookStock> findBookStocksByBookId(int bookId);
 }
