@@ -20,8 +20,8 @@ public class PermitAllFilter extends GenericFilter {
                 "/login",
                 "/error",
                 "/auth",
-                "/oauth2"
-
+                "/oauth2",
+                "/books"
         );
 
         String uri = request.getRequestURI();

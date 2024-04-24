@@ -29,6 +29,11 @@ public class BookInfoController {
         return ResponseEntity.ok(Map.of("searchText", searchBookReqDto.getText(), "books", bookInfoService.getBooks(searchBookReqDto)));
     }
 
+    @GetMapping("/books/count")
+    public ResponseEntity<?> getCount(SearchBookReqDto searchBookReqDto) {
+        return ResponseEntity.ok(bookInfoService.getBookCount(searchBookReqDto));
+    }
+
     @GetMapping("/book/{bookId}/stocks")
     public ResponseEntity<?> getBookStocks(@PathVariable int bookId) {
         return ResponseEntity.ok(bookInfoService.getBookStocks(bookId));
