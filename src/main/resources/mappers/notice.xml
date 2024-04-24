@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.t1.bookDrop.repository.NoticeMapper">
+
+    <resultMap id="NoticeResultMap" type="com.t1.bookDrop.entity.Notice">
+        <id property="noticeBoardId" column="notice_board_id"/>
+        <result property="noticeBoardCategoryId" column="notice_board_category_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
+
+    <insert id="saveNotice" parameterType="com.t1.bookDrop.entity.Notice">
+        insert into review_tb
+        values(
+            0,
+            #{noticeBoardCategoryId},
+            #{title},
+            #[content},
+            now(),
+            now()
+        )
+    </insert>
+
+</mapper>
