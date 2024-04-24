@@ -21,7 +21,6 @@
     <resultMap id="BookStockResultMap" type="com.t1.bookDrop.entity.BookStock">
         <id property="bookStockId" column="book_stock_id"/>
         <result property="bookId" column="book_id"/>
-        <association property="book" resultMap="BookResultMap" />
     </resultMap>
 
     <resultMap id="loanResultMap" type="com.t1.bookDrop.entity.Loan">
@@ -31,7 +30,7 @@
         <result property="loanDate" column="loan_date" />
         <result property="dueDate" column="due_date" />
         <result property="returnDate" column="return_date" />
-        <association property="bookStock" resultMap="BookStockResultMap" />
+        <association property="book" resultMap="BookResultMap" />
     </resultMap>
 
     <resultMap id="WishResultMap" type="com.t1.bookDrop.entity.Wish">
@@ -41,33 +40,33 @@
         <association property="book" resultMap="BookResultMap" />
     </resultMap>
 
-    <select id="getLoanHistory" parameterType="string" resultMap="loanResultMap">
+    <update id="updateProfileImage">
+        update
+            user_tb
+        set
+            profile_url = #{url}
+        where
+            user_id = #{userid}
+    </update>
+
+    <select id="getLoanHistory" parameterType="int" resultMap="loanResultMap">
         select
             lt.loan_id,
             lt.user_id,
             lt.book_stock_id,
-            tt.book_name,
-            tt.author_name,
-            tt.publisher_name,
+            bt.book_name,
+            bt.author_name,
+            bt.publisher_name,
             lt.loan_date,
             lt.due_date,
             lt.return_date
         from
             loan_tb lt
             left outer join user_tb ut on(ut.user_id = lt.user_id)
-            left outer join (
-                select
-                    bst.book_stock_id,
-                    bt.book_id,
-                    bt.book_name,
-                    bt.author_name,
-                    bt.publisher_name
-                from
-                    book_tb bt
-                    left outer join book_stock_tb bst on(bst.book_id = bt.book_id)
-                    ) tt on(tt.book_stock_id = lt.book_stock_id)
+            left outer join book_stock_tb bst on(bst.book_stock_id = lt.book_stock_id)
+            left outer join book_tb bt on(bt.book_id = bst.book_id)
         where
-            ut.username = #{username};
+            ut.user_id = #{userid};
     </select>
 
     <select id="getWishList" parameterType="int" resultMap="WishResultMap">

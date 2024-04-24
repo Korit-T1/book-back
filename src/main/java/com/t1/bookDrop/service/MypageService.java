@@ -1,5 +1,6 @@
 package com.t1.bookDrop.service;
 
+import com.t1.bookDrop.dto.reqDto.UpdateProfileImageReqDto;
 import com.t1.bookDrop.dto.respDto.mypage.LoanHistoryRespDto;
 import com.t1.bookDrop.entity.Book;
 import com.t1.bookDrop.entity.Loan;
@@ -17,13 +18,11 @@ public class MypageService {
     @Autowired
     private MyPageMapper myPageMapper;
 
-    public List<LoanHistoryRespDto> getLoanData(String username) {
-        List<Loan> loan = myPageMapper.getLoanHistory(username);
+    public List<LoanHistoryRespDto> getLoanData(int userid) {
+        List<Loan> loans = myPageMapper.getLoanHistory(userid);
 
-//        return loan.stream().map(Loan::toLoanHistoryRespDto).collect(Collectors.toList());
-        return null;
+        return loans.stream().map(Loan::toRespDto).collect(Collectors.toList());
     }
-
 
     public List<Wish> getWishData(int userid) {
         List<Wish> wishList = myPageMapper.getWishList(userid);
@@ -31,4 +30,8 @@ public class MypageService {
         return wishList;
     }
 
+    public int updateProfileImage(UpdateProfileImageReqDto updateProfileImageReqDto) {
+        System.out.println("service: "  + updateProfileImageReqDto);
+        return myPageMapper.updateProfileImage(updateProfileImageReqDto.getUserid(), updateProfileImageReqDto.getImageUrl());
+    }
 }

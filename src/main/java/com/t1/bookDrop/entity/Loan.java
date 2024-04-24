@@ -1,5 +1,6 @@
 package com.t1.bookDrop.entity;
 
+import com.t1.bookDrop.dto.respDto.mypage.LoanHistoryRespDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +19,16 @@ public class Loan {
     private LocalDateTime loanDate;
     private LocalDateTime dueDate;
     private LocalDateTime returnDate;
+
+    private Book book;
+
+    public LoanHistoryRespDto toRespDto() {
+        return LoanHistoryRespDto.builder()
+                .loanId(loanId)
+                .bookStockId(bookStockId)
+                .authorName(book.getAuthorName())
+                .bookName(book.getBookName())
+                .publisherName(book.getPublisherName())
+                .build();
+    }
 }

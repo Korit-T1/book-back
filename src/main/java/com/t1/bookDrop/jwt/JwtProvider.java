@@ -105,7 +105,6 @@ public class JwtProvider {
             );
         }else {
             User user = userMapper.userCheckByUsername(username);
-
             if (user == null) return null;
             PrincipalUser principalUser = user.toPrincipalUser();
             return new UsernamePasswordAuthenticationToken(
