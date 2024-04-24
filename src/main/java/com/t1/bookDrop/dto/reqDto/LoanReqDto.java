@@ -2,12 +2,10 @@ package com.t1.bookDrop.dto.reqDto;
 
 import com.t1.bookDrop.entity.Loan;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Data
-@Component
 public class LoanReqDto {
     private int loanId;
     private int userId;

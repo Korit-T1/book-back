@@ -27,6 +27,7 @@ public class User {
     private String gender;
     private int age;
     private String birth;
+    private String profileUrl;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
@@ -40,6 +41,7 @@ public class User {
                 .email(email)
                 .address(address)
                 .phone(phone)
+                .profileUrl(profileUrl)
                 .build();
     }
 }

@@ -23,6 +23,7 @@
         <result property="gender" column="gender" />
         <result property="age" column="age" />
         <result property="birth" column="birth" />
+        <result property="profileUrl" column="profile_Url" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
         <association property="oAuth2s" javaType="list" resultMap="OAuth2ResultMap" />
@@ -45,6 +46,7 @@
             gender,
             age,
             birth,
+            profile_url,
             create_date,
             update_date
         from
