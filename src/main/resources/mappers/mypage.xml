@@ -81,8 +81,19 @@
             wish_tb wt
             left outer join book_tb bt on(bt.book_id = wt.book_id)
         where
-            user_id = #{userid};
+            user_id = #{userid}
+        limit
+            #{index}, 6
     </select>
 
+    <select id="getWishCount" resultType="int">
+        select
+            count(*)
+        from
+            wish_tb wt
+            left outer join book_tb bt on(bt.book_id = wt.book_id)
+        where
+            user_id = #{userid}
+    </select>
 
 </mapper>

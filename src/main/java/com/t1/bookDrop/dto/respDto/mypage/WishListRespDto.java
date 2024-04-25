@@ -14,4 +14,5 @@ public class WishListRespDto {
     private String authorName;
     private String publisherName;
     private String imageUrl;
+
 }

@@ -10,6 +10,16 @@ import java.util.List;
 @Mapper
 public interface MyPageMapper {
     public List<Loan> getLoanHistory(int userid);
-    public List<Wish> getWishList(int userid);
+    public List<Wish> getWishList(
+            @Param("index") int index,
+            @Param("userid") int userid,
+            @Param("option") int option
+    );
+
+    public int getWishCount(
+            @Param("userid") int userid,
+            @Param("option") int option
+    );
+
     public int updateProfileImage(@Param("userid") int userid, @Param("url") String url);
 }

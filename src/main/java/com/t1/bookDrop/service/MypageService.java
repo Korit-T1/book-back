@@ -1,8 +1,12 @@
 package com.t1.bookDrop.service;
 
+import com.t1.bookDrop.dto.reqDto.GetWishReqDto;
+import com.t1.bookDrop.dto.reqDto.SearchBookReqDto;
 import com.t1.bookDrop.dto.reqDto.UpdateProfileImageReqDto;
+import com.t1.bookDrop.dto.respDto.SearchBookCountRespDto;
 import com.t1.bookDrop.dto.respDto.mypage.LoanHistoryRespDto;
 import com.t1.bookDrop.dto.respDto.mypage.WishListRespDto;
+import com.t1.bookDrop.dto.respDto.mypage.WishListResultRespDto;
 import com.t1.bookDrop.entity.Book;
 import com.t1.bookDrop.entity.Loan;
 import com.t1.bookDrop.entity.Wish;
@@ -25,10 +29,23 @@ public class MypageService {
         return loans.stream().map(Loan::toRespDto).collect(Collectors.toList());
     }
 
-    public List<WishListRespDto> getWishData(int userid) {
-        List<Wish> wishList = myPageMapper.getWishList(userid);
+    public List<WishListRespDto> getWishData(GetWishReqDto getWishReqDto) {
+        int index = (getWishReqDto.getPage() - 1) * 6;
+
+        List<Wish> wishList = myPageMapper.getWishList(
+                index,
+                getWishReqDto.getUserid(),
+                getWishReqDto.getOption()
+        );
 
         return wishList.stream().map(Wish::toRespDto).collect(Collectors.toList());
+    }
+
+    public int getWishCount(GetWishReqDto getWishReqDto) {
+        return myPageMapper.getWishCount(
+                getWishReqDto.getUserid(),
+                getWishReqDto.getOption()
+        );
     }
 
     public int updateProfileImage(UpdateProfileImageReqDto updateProfileImageReqDto) {
