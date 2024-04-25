@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class NoticeBoardReqDto {
+public class NoticeReqDto {
 
     private int noticeBoardCategoryId;
     private String title;

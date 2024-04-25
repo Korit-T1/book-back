@@ -12,18 +12,39 @@
         <result property="content" column="content"/>
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
+        <association property="noticeCategory" resultMap="NoticeCategoryResultMap"/>
+    </resultMap>
+    
+    <resultMap id="NoticeCategoryResultMap" type="com.t1.bookDrop.entity.NoticeCategory">
+        <id property="noticeBoardCategoryId" column="notice_board_category_id"/>
+        <result property="noticeBoardCategoryName" column="notice_board_category_name"/>
     </resultMap>
 
     <insert id="saveNotice" parameterType="com.t1.bookDrop.entity.Notice">
-        insert into review_tb
+        insert into notice_board_tb
         values(
             0,
             #{noticeBoardCategoryId},
             #{title},
-            #[content},
+            #{content},
             now(),
             now()
         )
     </insert>
+
+    <select id="findNoticeAllByNoticeBoardId" resultMap="NoticeResultMap">
+        select
+            nt.notice_board_id,
+            nt.title,
+            nt.content,
+            nt.create_date,
+            nt.update_date,
+            nct.notice_board_category_name
+        from
+            notice_board_tb nt
+            left outer join notice_board_category_tb nct on(nct.notice_board_category_id = nt.notice_board_category_id)
+        where
+            nt.notice_board_id = #{noticeBoardId}
+    </select>
 
 </mapper>
