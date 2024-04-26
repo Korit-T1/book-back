@@ -29,6 +29,7 @@ public class Loan {
                 .authorName(book.getAuthorName())
                 .bookName(book.getBookName())
                 .publisherName(book.getPublisherName())
+                .imageUrl(book.getCoverImgUrl())
                 .build();
     }
 }
