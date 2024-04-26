@@ -3,7 +3,7 @@ package com.t1.bookDrop.dto.reqDto;
 import lombok.Data;
 
 @Data
-public class GetWishReqDto {
+public class MyBookReqDto {
     private int userid;
     private int page;
     private int option;

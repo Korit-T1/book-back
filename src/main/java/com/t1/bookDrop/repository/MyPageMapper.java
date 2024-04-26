@@ -9,13 +9,32 @@ import java.util.List;
 
 @Mapper
 public interface MyPageMapper {
-    public List<Loan> getLoanHistory(int userid);
-    public List<Wish> getWishList(
+    public List<Loan> getReadingBooks(
             @Param("index") int index,
             @Param("userid") int userid,
             @Param("option") int option
     );
 
+    public int getReadingBooksCount(
+            @Param("userid") int userid,
+            @Param("option") int option
+    );
+
+    public List<Loan> getReturnedBooks(
+            @Param("index") int index,
+            @Param("userid") int userid,
+            @Param("option") int option
+    );
+    public int getReturnedBooksCount(
+            @Param("userid") int userid,
+            @Param("option") int option
+    );
+
+    public List<Wish> getWishList(
+            @Param("index") int index,
+            @Param("userid") int userid,
+            @Param("option") int option
+    );
     public int getWishCount(
             @Param("userid") int userid,
             @Param("option") int option
