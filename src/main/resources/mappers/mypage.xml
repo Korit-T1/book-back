@@ -67,7 +67,7 @@
             left outer join book_stock_tb bst on(bst.book_stock_id = lt.book_stock_id)
             left outer join book_tb bt on(bt.book_id = bst.book_id)
         where
-            ut.user_id = #{userid};
+            ut.user_id = #{userid} and return_date is null;
     </select>
 
     <select id="getWishList" parameterType="int" resultMap="WishResultMap">

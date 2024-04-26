@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/loan")
-public class BookLoanController {
+public class  BookLoanController {
 
     @Autowired
     private LoanService loanService;

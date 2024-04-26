@@ -211,7 +211,7 @@
             book_id = #{bookId}
     </update>
 
-    <update id="updateReturnDate" parameterType="int"> //반납일자 업데이트
+    <update id="updateReturnDate" parameterType="int">
         update
             loan_tb
         set
