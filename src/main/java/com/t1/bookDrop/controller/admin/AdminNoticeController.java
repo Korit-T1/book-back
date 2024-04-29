@@ -30,4 +30,11 @@ public class AdminNoticeController {
     public ResponseEntity<List<NoticeRespDto>> findNotice(@PathVariable int noticeBoardId){
         return ResponseEntity.ok(noticeService.getNotice(noticeBoardId));
     }
+
+    @DeleteMapping("/notice")
+    public ResponseEntity<?> deleteNotice(@RequestBody List<Integer> noticeIds) {
+        noticeService.deleteNotice(noticeIds);
+        return ResponseEntity.ok(true);
+    }
+
 }

@@ -26,4 +26,9 @@ public class NoticeService {
         return noticeMapper.findNoticeAllByNoticeBoardId(noticeBoardId).stream().map(Notice::toDto).collect(Collectors.toList());
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteNotice(List<Integer> noticeIds) {
+        noticeMapper.deleteNoticeByNoticeIds(noticeIds);
+    }
+
 }

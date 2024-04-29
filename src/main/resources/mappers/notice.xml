@@ -47,4 +47,16 @@
             nt.notice_board_id = #{noticeBoardId}
     </select>
 
+    <delete id="deleteNoticeByNoticeIds" parameterType="list">
+        delete
+        from
+            notice_board_tb
+        where
+            notice_board_id in(
+                <foreach collection="noticeIds" item="noticeId" separator=",">
+                    #{noticeId}
+                </foreach>
+            )
+    </delete>
+
 </mapper>
