@@ -4,6 +4,8 @@ package com.t1.bookDrop.dto.reqDto;
 import com.t1.bookDrop.entity.Book;
 import lombok.Data;
 
+//import java.util.Base64;
+
 @Data
 public class UpdateBookReqDto {
     private int bookId;
@@ -13,7 +15,7 @@ public class UpdateBookReqDto {
     private String authorName;
     private String publisherName;
     private String coverImgUrl;
-    private int bookTypeId;
+    private int bookTypeId; // 확인하기, 전체 순서도.
 
     public Book toEntity() {
         return Book.builder()

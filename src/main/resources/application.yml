@@ -34,10 +34,6 @@ spring:
     oauth2:
       client:
         registration:
-          google:
-            scope:
-              - email
-              - profile
           naver:
             clientName: Naver
             authorizationGrantType: authorization_code
@@ -64,3 +60,6 @@ client:
 mybatis:
   mapper-locations:
     - /mappers/*.xml
+
+
+

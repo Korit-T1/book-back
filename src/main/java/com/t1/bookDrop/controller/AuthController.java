@@ -28,6 +28,7 @@ public class AuthController {
     public ResponseEntity<?> signup(
             @Valid @RequestBody SignupReqDto signupReqDto, BindingResult bindingResult
     ) {
+        System.out.println(signupReqDto);
         authService.signup(signupReqDto);
         return ResponseEntity.created(null).body(true);
     }

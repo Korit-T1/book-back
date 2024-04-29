@@ -17,7 +17,7 @@ public class SearchBookRespDto {
     private String bookName;
     private String authorName;
     private String publisherName;
-    private String coverImgUrl;
+    private String coverImgUrl; 
     private LocalDateTime publishDate;
 
 }
