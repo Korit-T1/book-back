@@ -24,9 +24,14 @@ public class BookInfoController {
         return ResponseEntity.ok(bookInfo);
     }
 
-    @GetMapping("/books")
+//    @GetMapping("/books")
+//    public ResponseEntity<?> searchBooks(SearchBookReqDto searchBookReqDto) {
+//        return ResponseEntity.ok(Map.of("searchText", searchBookReqDto.getText(), "books", bookInfoService.getBooks(searchBookReqDto)));
+//    }
+
+  @GetMapping("/books")
     public ResponseEntity<?> searchBooks(SearchBookReqDto searchBookReqDto) {
-        return ResponseEntity.ok(Map.of("searchText", searchBookReqDto.getText(), "books", bookInfoService.getBooks(searchBookReqDto)));
+        return ResponseEntity.ok(bookInfoService.getBooks(searchBookReqDto));
     }
 
     @GetMapping("/books/count")

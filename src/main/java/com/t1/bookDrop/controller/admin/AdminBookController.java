@@ -44,6 +44,7 @@ public class AdminBookController {
         return ResponseEntity.ok(true);
     }
 
+
     @ParamsPrintAspect
     @PutMapping("/book/{bookId}")
     public ResponseEntity<?> updateBook(

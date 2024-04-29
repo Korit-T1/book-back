@@ -219,5 +219,4 @@
         where
             loan_id = #{loanId}
     </update>
-
 </mapper>
