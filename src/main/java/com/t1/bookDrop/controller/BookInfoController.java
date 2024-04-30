@@ -1,5 +1,6 @@
 package com.t1.bookDrop.controller;
 
+import com.t1.bookDrop.aop.annotation.ParamsPrintAspect;
 import com.t1.bookDrop.dto.reqDto.SearchBookReqDto;
 import com.t1.bookDrop.dto.respDto.SearchBookRespDto;
 import com.t1.bookDrop.service.BookInfoService;
@@ -41,5 +42,10 @@ public class BookInfoController {
         return ResponseEntity.ok(bookInfoService.getBookStocks(bookId));
     }
 
+    @ParamsPrintAspect
+    @PutMapping("/notice/{noticeId}")
+    public ResponseEntity<?> updateNotice() {
+        return ResponseEntity.ok(null);
+    }
 
 }
