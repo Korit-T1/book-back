@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class    BookInfoService {
+public class BookInfoService {
     @Autowired
     private BookMapper bookMapper;
 
@@ -26,10 +26,10 @@ public class    BookInfoService {
         bookMapper.saveBook(registerBookReqDto.toEntity());
     }
 
-    public List<SearchBookRespDto> searchBookInfo(int bookId){ // 삭제 예정
-        List<Book> bookInfo = bookMapper.getBook(bookId);
-        return bookInfo.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
-    }
+//    public List<SearchBookRespDto> searchBookInfo(int bookId){ // 삭제 예정
+//        List<Book> bookInfo = bookMapper.getBook(bookId);
+//        return bookInfo.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
+//    }
 
     public List<SearchBookRespDto> getBooks(SearchBookReqDto searchBookReqDto) {
         int index = (searchBookReqDto.getPage() - 1) * 20;

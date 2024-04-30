@@ -20,16 +20,12 @@ public class BookInfoController {
     @Autowired
     private BookInfoService bookInfoService;
 
-    @GetMapping("/book/{bookId}")   //삭제 예정
-    public ResponseEntity<List<SearchBookRespDto>> searchBookInfo(@PathVariable int bookId){
-        List<SearchBookRespDto> bookInfo = bookInfoService.searchBookInfo(bookId);
-        return ResponseEntity.ok(bookInfo);
-    }
-
-//    @GetMapping("/books")
-//    public ResponseEntity<?> searchBooks(SearchBookReqDto searchBookReqDto) {
-//        return ResponseEntity.ok(Map.of("searchText", searchBookReqDto.getText(), "books", bookInfoService.getBooks(searchBookReqDto)));
+//    @GetMapping("/book/{bookId}")   //삭제 예정
+//    public ResponseEntity<List<SearchBookRespDto>> searchBookInfo(@PathVariable int bookId){
+//        List<SearchBookRespDto> bookInfo = bookInfoService.searchBookInfo(bookId);
+//        return ResponseEntity.ok(bookInfo);
 //    }
+
 
   @GetMapping("/books")
     public ResponseEntity<?> searchBooks(SearchBookReqDto searchBookReqDto) {

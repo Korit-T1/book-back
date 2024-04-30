@@ -28,10 +28,10 @@ public class AdminBookController {
         return ResponseEntity.created(null).body(true);
     }
 
-    @GetMapping("/book/{bookId}")
-    public ResponseEntity<?> searchBookInfo(@PathVariable int bookId) {
-        return ResponseEntity.ok(bookInfoService.searchBookInfo(bookId));
-    }
+//    @GetMapping("/book/{bookId}")
+//    public ResponseEntity<?> searchBookInfo(@PathVariable int bookId) {
+//        return ResponseEntity.ok(bookInfoService.searchBookInfo(bookId));
+//    }
 
 //    @GetMapping("/book/count")
 //    public ResponseEntity<?> getCount(SearchBooksReqDto searchBooksReqDto) {

@@ -9,5 +9,6 @@ import java.time.LocalDateTime;
 @Data
 public class ReviewRespDto {
     private String content;
+    private float rating;
     private LocalDateTime createDate;
 }

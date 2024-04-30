@@ -28,7 +28,7 @@ public class Book {
     private LocalDateTime publishDate;
 
     private Category category;
-    private Rating rating;
+    private float averageRating;
 
     public SearchBookRespDto toSearchBookRespDto() {
         return SearchBookRespDto.builder()
@@ -41,6 +41,7 @@ public class Book {
                 .publisherName(publisherName)
                 .coverImgUrl(coverImgUrl)
                 .publishDate(publishDate)
+                .averageRating(averageRating)
                 .build();
     }
 
