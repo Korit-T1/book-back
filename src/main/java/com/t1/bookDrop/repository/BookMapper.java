@@ -35,7 +35,9 @@ public interface BookMapper {
 
     public int updateReturnDate(int loanId);
 
-
-
     public List<BookStock> findBookStocksByBookId(int bookId);
+
+    // 메인 홈페이지
+    public List<Book> getPopularBooks();
+    public List<Book> getTopFiveBooks();
 }

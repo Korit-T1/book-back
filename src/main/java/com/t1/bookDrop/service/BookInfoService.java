@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class    BookInfoService {
+public class BookInfoService {
     @Autowired
     private BookMapper bookMapper;
 
@@ -65,5 +65,15 @@ public class    BookInfoService {
     @Transactional(rollbackFor = Exception.class)
     public void updateBook(UpdateBookReqDto updateBookReqDto) {
         bookMapper.updateBookByBookId(updateBookReqDto.toEntity());
+    }
+
+    public List<SearchBookRespDto> getPopularBooks() {
+        List<Book> list = bookMapper.getPopularBooks();
+        return list.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
+    }
+
+    public List<SearchBookRespDto> getTopFiveBooks() {
+        List<Book> list = bookMapper.getTopFiveBooks();
+        return list.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
     }
 }
