@@ -66,4 +66,19 @@ public class BookInfoService {
     public void updateBook(UpdateBookReqDto updateBookReqDto) {
         bookMapper.updateBookByBookId(updateBookReqDto.toEntity());
     }
+
+    public List<SearchBookRespDto> getPopularBooks() {
+        List<Book> list = bookMapper.getPopularBooks();
+        return list.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
+    }
+
+    public List<SearchBookRespDto> getTopFiveBooks() {
+        List<Book> list = bookMapper.getTopFiveBooks();
+        return list.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
+    }
+
+    public List<SearchBookRespDto> getNewBooks() {
+        List<Book> list = bookMapper.getNewBooks();
+        return list.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
+    }
 }

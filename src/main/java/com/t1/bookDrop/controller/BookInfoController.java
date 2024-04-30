@@ -26,8 +26,7 @@ public class BookInfoController {
 //        return ResponseEntity.ok(bookInfo);
 //    }
 
-
-  @GetMapping("/books")
+    @GetMapping("/books")
     public ResponseEntity<?> searchBooks(SearchBookReqDto searchBookReqDto) {
         return ResponseEntity.ok(bookInfoService.getBooks(searchBookReqDto));
     }
@@ -46,6 +45,21 @@ public class BookInfoController {
     @PutMapping("/notice/{noticeId}")
     public ResponseEntity<?> updateNotice() {
         return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/books/popular")
+    public ResponseEntity<?> getPopularBooks() {
+        return ResponseEntity.ok(bookInfoService.getPopularBooks());
+    }
+
+    @GetMapping("/books/top5")
+    public ResponseEntity<?> getTopFiveBooks() {
+        return ResponseEntity.ok(bookInfoService.getTopFiveBooks());
+    }
+
+    @GetMapping("/books/new")
+    public ResponseEntity<?> getNewBooks() {
+        return ResponseEntity.ok(bookInfoService.getNewBooks());
     }
 
 }
