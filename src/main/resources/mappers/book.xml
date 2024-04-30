@@ -235,7 +235,8 @@
         from
             book_tb bt
             left outer join category_tb ct on(ct.category_id = bt.category_id)
-        ORDER BY book_name DESC
+        ORDER BY
+            book_name DESC
         LIMIT 5;
     </select>
 
@@ -254,9 +255,32 @@
         from
             book_tb bt
             left outer join category_tb ct on(ct.category_id = bt.category_id)
-        ORDER BY publisher_name
+        ORDER BY
+            RAND()
         LIMIT 5;
     </select>
+
+    <select id="getNewBooks" resultMap="BookResultMap">
+        SELECT
+            bt.book_id,
+            bt.isbn,
+            ct.category_name,
+            bt.book_name,
+            bt.author_name,
+            bt.publisher_name,
+            bt.cover_img_url,
+            bt.create_date,
+            bt.update_date,
+            bt.publish_date
+        FROM
+            book_tb bt
+            left outer join category_tb ct on(ct.category_id = bt.category_id)
+        ORDER BY
+            bt.publish_date DESC,
+            TIME(bt.publish_date) DESC
+        LIMIT 10;
+    </select>
+
 
 
 

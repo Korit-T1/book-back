@@ -76,4 +76,9 @@ public class BookInfoService {
         List<Book> list = bookMapper.getTopFiveBooks();
         return list.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
     }
+
+    public List<SearchBookRespDto> getNewBooks() {
+        List<Book> list = bookMapper.getNewBooks();
+        return list.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
+    }
 }

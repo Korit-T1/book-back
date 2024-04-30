@@ -53,4 +53,9 @@ public class BookInfoController {
     public ResponseEntity<?> getTopFiveBooks() {
         return ResponseEntity.ok(bookInfoService.getTopFiveBooks());
     }
+
+    @GetMapping("/books/new")
+    public ResponseEntity<?> getNewBooks() {
+        return ResponseEntity.ok(bookInfoService.getNewBooks());
+    }
 }
