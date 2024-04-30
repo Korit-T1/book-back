@@ -17,12 +17,14 @@ public class Review {
     private int bookId;
     private int userId;
     private String content;
+    private float rating;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
     public ReviewRespDto toDto() {
         return ReviewRespDto.builder()
                 .content(content)
+                .rating(rating)
                 .createDate(createDate)
                 .build();
     }

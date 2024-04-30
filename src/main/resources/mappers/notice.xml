@@ -47,4 +47,27 @@
             nt.notice_board_id = #{noticeBoardId}
     </select>
 
+    <delete id="deleteNoticeByNoticeIds" parameterType="list">
+        delete
+        from
+            notice_board_tb
+        where
+            notice_board_id in(
+                <foreach collection="noticeIds" item="noticeId" separator=",">
+                    #{noticeId}
+                </foreach>
+            )
+    </delete>
+
+    <update id="updateNoticeByNoticeId" parameterType="com.t1.bookDrop.entity.Notice">
+        update
+            notice_board_tb
+        set
+            notice_board_category_id = #{noticeBoardCategoryId},
+            title = #{title},
+            content = #{content},
+            update_date = now()
+        where
+            notice_board_id = #{noticeBoardId}
+    </update>
 </mapper>

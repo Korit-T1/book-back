@@ -10,13 +10,6 @@
         <result property="categoryName" column="category_name"/>
     </resultMap>
 
-    <resultMap id="RatingResultMap" type="com.t1.bookDrop.entity.Rating">
-        <id property="bookRatingId" column="book_rating_id"/>
-        <result property="userId" column="user_id"/>
-        <result property="bookId" column="book_id"/>
-        <result property="rating" column="rating"/>
-    </resultMap>
-
     <resultMap id="BookResultMap" type="com.t1.bookDrop.entity.Book">
         <id property="bookId" column="book_id" />
         <result property="isbn" column="isbn"/>
@@ -28,8 +21,8 @@
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date" />
         <result property="publishDate" column="publish_date" />
+        <result property="averageRating" column="average_rating"/>
         <association property="category" resultMap="CategoryResultMap"/>
-        <association property="rating" resultMap="RatingResultMap"/>
     </resultMap>
 
     <resultMap id="BookStockResultMap" type="com.t1.bookDrop.entity.BookStock">
@@ -92,7 +85,6 @@
         from
             book_tb bt
             left outer join category_tb ct on(ct.category_id = bt.category_id)
-            left outer join book_rating_tb brt on (brt.book_id = bt.book_id)
         where
             bt.book_id = #{bookId}
     </select>
@@ -108,10 +100,19 @@
             bt.create_date,
             bt.update_date,
             bt.publish_date,
-            ct.category_name
+            ct.category_name,
+            temp_rating_tb.average_rating
         from
             book_tb bt
             left outer join category_tb ct on(ct.category_id = bt.category_id)
+            left outer join (
+                select
+                    book_id,
+                    avg(rating) as average_rating
+                from
+                    review_tb
+                group by
+                    book_id) temp_rating_tb on(temp_rating_tb.book_id = bt.book_id)
         where
         1 = 1
             <if test="option == 0">

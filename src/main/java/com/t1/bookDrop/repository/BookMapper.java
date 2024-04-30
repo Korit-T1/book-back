@@ -14,9 +14,9 @@ public interface BookMapper {
     public int saveBook(Book book);
     public int saveLoan(Loan loan);
 
-    public List<Book> getBook( // 기능 확인
-            @Param("bookId") int bookId
-    );
+//    public List<Book> getBook( // 기능 확인
+//            @Param("bookId") int bookId
+//    );
 
     public List<Book> findBooksAll(
             @Param("index") int index,

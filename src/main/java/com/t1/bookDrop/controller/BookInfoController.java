@@ -1,5 +1,6 @@
 package com.t1.bookDrop.controller;
 
+import com.t1.bookDrop.aop.annotation.ParamsPrintAspect;
 import com.t1.bookDrop.dto.reqDto.SearchBookReqDto;
 import com.t1.bookDrop.dto.respDto.SearchBookRespDto;
 import com.t1.bookDrop.service.BookInfoService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,15 +20,10 @@ public class BookInfoController {
     @Autowired
     private BookInfoService bookInfoService;
 
-    @GetMapping("/book/{bookId}")   //삭제 예정
-    public ResponseEntity<List<SearchBookRespDto>> searchBookInfo(@PathVariable int bookId){
-        List<SearchBookRespDto> bookInfo = bookInfoService.searchBookInfo(bookId);
-        return ResponseEntity.ok(bookInfo);
-    }
-
-//    @GetMapping("/books")
-//    public ResponseEntity<?> searchBooks(SearchBookReqDto searchBookReqDto) {
-//        return ResponseEntity.ok(Map.of("searchText", searchBookReqDto.getText(), "books", bookInfoService.getBooks(searchBookReqDto)));
+//    @GetMapping("/book/{bookId}")   //삭제 예정
+//    public ResponseEntity<List<SearchBookRespDto>> searchBookInfo(@PathVariable int bookId){
+//        List<SearchBookRespDto> bookInfo = bookInfoService.searchBookInfo(bookId);
+//        return ResponseEntity.ok(bookInfo);
 //    }
 
     @GetMapping("/books")
@@ -44,6 +41,12 @@ public class BookInfoController {
         return ResponseEntity.ok(bookInfoService.getBookStocks(bookId));
     }
 
+    @ParamsPrintAspect
+    @PutMapping("/notice/{noticeId}")
+    public ResponseEntity<?> updateNotice() {
+        return ResponseEntity.ok(null);
+    }
+
     @GetMapping("/books/popular")
     public ResponseEntity<?> getPopularBooks() {
         return ResponseEntity.ok(bookInfoService.getPopularBooks());
@@ -58,4 +61,5 @@ public class BookInfoController {
     public ResponseEntity<?> getNewBooks() {
         return ResponseEntity.ok(bookInfoService.getNewBooks());
     }
+
 }
