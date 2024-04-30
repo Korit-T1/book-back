@@ -59,4 +59,15 @@
             )
     </delete>
 
+    <update id="updateNoticeByNoticeId" parameterType="com.t1.bookDrop.entity.Notice">
+        update
+            notice_board_tb
+        set
+            notice_board_category_id = #{noticeBoardCategoryId},
+            title = #{title},
+            content = #{content},
+            update_date = now()
+        where
+            notice_board_id = #{noticeBoardId}
+    </update>
 </mapper>

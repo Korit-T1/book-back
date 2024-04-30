@@ -1,6 +1,7 @@
 package com.t1.bookDrop.service;
 
 import com.t1.bookDrop.dto.reqDto.NoticeReqDto;
+import com.t1.bookDrop.dto.reqDto.UpdateNoticeReqDto;
 import com.t1.bookDrop.dto.respDto.NoticeRespDto;
 import com.t1.bookDrop.entity.Notice;
 import com.t1.bookDrop.repository.NoticeMapper;
@@ -31,4 +32,9 @@ public class NoticeService {
         noticeMapper.deleteNoticeByNoticeIds(noticeIds);
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public void updateNotice(UpdateNoticeReqDto updateNoticeReqDto, int noticeBoardId) {
+        noticeMapper.updateNoticeByNoticeId(updateNoticeReqDto.toEntity(noticeBoardId));
+        System.out.println("service: " + noticeMapper.updateNoticeByNoticeId(updateNoticeReqDto.toEntity(noticeBoardId)));
+    }
 }

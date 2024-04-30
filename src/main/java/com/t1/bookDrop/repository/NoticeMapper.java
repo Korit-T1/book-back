@@ -13,4 +13,6 @@ public interface NoticeMapper {
     public List<Notice> findNoticeAllByNoticeBoardId(int noticeBoardId);
 
     public int deleteNoticeByNoticeIds(List<Integer> noticeIds);
+
+    public int updateNoticeByNoticeId(Notice notice);
 }

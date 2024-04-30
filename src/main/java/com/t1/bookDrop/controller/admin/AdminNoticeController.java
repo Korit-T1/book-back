@@ -1,7 +1,9 @@
 package com.t1.bookDrop.controller.admin;
 
+import com.t1.bookDrop.aop.annotation.ParamsPrintAspect;
 import com.t1.bookDrop.aop.annotation.ValidAspect;
 import com.t1.bookDrop.dto.reqDto.NoticeReqDto;
+import com.t1.bookDrop.dto.reqDto.UpdateNoticeReqDto;
 import com.t1.bookDrop.dto.respDto.NoticeRespDto;
 import com.t1.bookDrop.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +39,12 @@ public class AdminNoticeController {
         return ResponseEntity.ok(true);
     }
 
+    @ParamsPrintAspect
+    @PutMapping("/notice/{noticeBoardId}")
+    public ResponseEntity<?> updateNotice(
+            @PathVariable int noticeBoardId,
+            @RequestBody UpdateNoticeReqDto updateNoticeReqDto) {
+        noticeService.updateNotice(updateNoticeReqDto, noticeBoardId);
+        return ResponseEntity.ok(true);
+    }
 }
