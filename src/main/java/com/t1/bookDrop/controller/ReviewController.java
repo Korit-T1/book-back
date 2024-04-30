@@ -30,4 +30,5 @@ public class ReviewController {
     public ResponseEntity<List<ReviewRespDto>> findReviews(@PathVariable int bookId){
         return ResponseEntity.ok(reviewService.getReview(bookId));
     }
+
 }

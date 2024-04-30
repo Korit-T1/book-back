@@ -19,5 +19,5 @@ public class SearchBookRespDto {
     private String publisherName;
     private String coverImgUrl; 
     private LocalDateTime publishDate;
-
+    private float averageRating;
 }

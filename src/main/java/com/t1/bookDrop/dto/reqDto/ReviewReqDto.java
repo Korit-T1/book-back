@@ -13,6 +13,7 @@ public class ReviewReqDto {
     private int bookId;
     private int userId;
     private String content;
+    private float rating;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
@@ -22,6 +23,7 @@ public class ReviewReqDto {
                 .bookId(bookId)
                 .userId(userId)
                 .content(content)
+                .rating(rating)
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();

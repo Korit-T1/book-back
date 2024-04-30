@@ -10,6 +10,7 @@
         <result property="bookId" column="book_id"/>
         <result property="userId" column="user_id"/>
         <result property="content" column="content"/>
+        <result property="rating" column="rating"/>
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
     </resultMap>
@@ -21,6 +22,7 @@
             #{bookId},
             #{userId},
             #{content},
+            #{rating},
             now(),
             null
         )
@@ -30,6 +32,7 @@
             rt.book_id,
             rt.user_id,
             rt.content,
+            rt.rating,
             rt.create_date
         from
             review_tb rt
