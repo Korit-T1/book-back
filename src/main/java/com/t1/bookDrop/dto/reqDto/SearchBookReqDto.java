@@ -7,5 +7,6 @@ public class SearchBookReqDto {
     private int page;
     private int count;
     private int option;
+    private int filter;
     private String text;
 }

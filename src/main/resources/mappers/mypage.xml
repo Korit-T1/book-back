@@ -37,6 +37,8 @@
         <id property="wishId" column="wish_id" />
         <result property="bookId" column="book_id" />
         <result property="userId" column="user_id" />
+        <result property="reviewCount" column="review_count" />
+        <result property="avgRating" column="average_rating" />
         <association property="book" resultMap="BookResultMap" />
     </resultMap>
 
@@ -103,8 +105,22 @@
             left outer join book_stock_tb bst on(bst.book_stock_id = lt.book_stock_id)
             left outer join book_tb bt on(bt.book_id = bst.book_id)
         where
-            ut.user_id = #{userid}
+        1 = 1
+            and ut.user_id = #{userid}
             and lt.return_date is not null
+            <if test="filter == 0"></if>
+            <if test="filter == 1">
+                and lt.due_date > lt.return_date
+            </if>
+            <if test="filter == 2">
+                and lt.due_date > lt.return_date
+            </if>
+            <if test="filter == 3">
+                and lt.due_date > lt.return_date
+            </if>
+            <if test="filter == 4">
+                and lt.return_date > lt.due_date
+            </if>
         limit
             #{index}, 6;
     </select>
@@ -127,12 +143,44 @@
             bt.book_name,
             bt.author_name,
             bt.publisher_name,
-            bt.cover_img_url
+            bt.cover_img_url,
+            temp_rating_tb.average_rating,
+            temp_rating_tb.review_count
         from
             wish_tb wt
             left outer join book_tb bt on(bt.book_id = wt.book_id)
+            left outer join (
+                select
+                    book_id,
+                    avg(rating) as average_rating,
+                    count(*) as review_count
+                from
+                    review_tb
+                group by
+                    book_id) temp_rating_tb on(temp_rating_tb.book_id = bt.book_id)
         where
             user_id = #{userid}
+        order by
+            <choose>
+                <when test="filter == 0">
+                    bt.book_id
+                </when>
+                <when test="filter == 1">
+                    temp_rating_tb.average_rating DESC
+                </when>
+                <when test="filter == 2">
+                    temp_rating_tb.average_rating
+                </when>
+                <when test="filter == 3">
+                    temp_rating_tb.review_count DESC
+                </when>
+                <when test="filter == 4">
+                    temp_rating_tb.review_count
+                </when>
+                <!--                <otherwise>-->
+                <!--                    -->
+                <!--                </otherwise>-->
+            </choose>
         limit
             #{index}, 6
     </select>
@@ -146,5 +194,78 @@
         where
             user_id = #{userid}
     </select>
+
+    <select id="getOverdueCount" resultType="int">
+        SELECT
+            COUNT(*) AS overdue_count
+        FROM
+            loan_tb
+        WHERE
+            user_id = #{userid}
+            AND return_date > due_date
+            AND return_date IS NOT NULL;
+    </select>
+
+    <select id="getReadingCount" resultType="int">
+        SELECT
+            COUNT(*) AS loan_count
+        FROM
+            loan_tb
+        WHERE
+            user_id = #{userid}
+            AND return_date IS NULL;
+    </select>
+
+    <select id="getReturnedCount" resultType="int">
+        SELECT
+            COUNT(*) AS returned_count
+        FROM
+            loan_tb
+        WHERE
+            user_id = #{userid}
+            AND return_date IS NOT NULL;
+    </select>
+
+    <select id="getFavoriteInfo" resultType="com.t1.bookDrop.entity.FavoriteCategory">
+        select
+            COUNT(*) as count,
+            ct.category_name as name
+        from
+            loan_tb lt
+            left outer join book_stock_tb bst on(bst.book_stock_id = lt.book_stock_id)
+            left outer join book_tb bt on(bt.book_id = bst.book_id)
+            left outer join category_tb ct on(ct.category_id = bt.category_id)
+        where
+            lt.user_id = #{userid}
+        group by
+            name
+        order by
+            count DESC
+        LIMIT 1;
+    </select>
+
+    <select id="getMostLoanedInfo" resultType="com.t1.bookDrop.entity.MostLoanedBook">
+        select
+            COUNT(*) as count,
+            ct.category_name as categoryName,
+            bt.book_name as bookName,
+            bt.author_name as authorName,
+            bt.publisher_name as publisherName,
+            bt.cover_img_url as url
+        from
+            loan_tb lt
+            left outer join book_stock_tb bst on(bst.book_stock_id = lt.book_stock_id)
+            left outer join book_tb bt on(bt.book_id = bst.book_id)
+            left outer join category_tb ct on(ct.category_id = bt.category_id)
+        where
+            lt.user_id = 10
+        group by
+            bt.book_id
+        order by
+            count DESC
+        LIMIT 1;
+    </select>
+
+
 
 </mapper>

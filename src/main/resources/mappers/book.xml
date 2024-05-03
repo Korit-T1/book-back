@@ -131,6 +131,27 @@
             <if test="option == 3">
                 and bt.publisher_name like concat("%", #{text}, "%")
             </if>
+        order by
+            <choose>
+                <when test="filter == 0">
+                    bt.book_id
+                </when>
+                <when test="filter == 1">
+                    temp_rating_tb.average_rating DESC
+                </when>
+                <when test="filter == 2">
+                    temp_rating_tb.average_rating
+                </when>
+                <when test="filter == 3">
+                    temp_rating_tb.average_rating DESC
+                </when>
+                <when test="filter == 4">
+                    temp_rating_tb.average_rating
+                </when>
+<!--                <otherwise>-->
+<!--                    -->
+<!--                </otherwise>-->
+            </choose>
         limit #{index}, 20
     </select>
 

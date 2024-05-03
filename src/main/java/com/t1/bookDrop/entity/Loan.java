@@ -30,6 +30,9 @@ public class Loan {
                 .bookName(book.getBookName())
                 .publisherName(book.getPublisherName())
                 .imageUrl(book.getCoverImgUrl())
+                .loanDate(loanDate)
+                .dueDate(dueDate)
+                .returnDate(returnDate)
                 .build();
     }
 }

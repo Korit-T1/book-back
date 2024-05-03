@@ -37,6 +37,7 @@ public class BookInfoService {
                 index,
                 searchBookReqDto.getCount(),
                 searchBookReqDto.getOption(),
+                searchBookReqDto.getFilter(),
                 searchBookReqDto.getText()
         );
         return books.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
