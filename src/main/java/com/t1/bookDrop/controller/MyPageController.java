@@ -51,7 +51,10 @@ public class MyPageController {
         return ResponseEntity.ok().body(mypageService.updateProfileImage(updateProfileImageReqDto));
     }
 
-
+    @GetMapping("/summary")
+    public ResponseEntity<?> getSummaryCount(int userid) {
+        return ResponseEntity.ok().body(mypageService.getSummaryInfo(userid));
+    }
 
 
 

@@ -18,24 +18,22 @@ public class Wish {
     private int bookId;
     private int userId;
 
+    private int reviewCount;
+    private float avgRating;
+
     private Book book;
 
     public WishListRespDto toRespDto() {
         return WishListRespDto.builder()
                 .wishId(wishId)
                 .bookId(bookId)
+                .avgRating(avgRating)
+                .reviewCount(reviewCount)
                 .bookName(book.getBookName())
                 .authorName(book.getAuthorName())
                 .publisherName(book.getPublisherName())
                 .imageUrl(book.getCoverImgUrl())
                 .build();
     }
-
-//    public WishListResultRespDto toRespDto(int count, List<WishListRespDto> list) {
-//        return WishListResultRespDto.builder()
-//                .totalWishCount(count)
-//                .wishListRespDto(list)
-//                .build();
-//    }
 
 }

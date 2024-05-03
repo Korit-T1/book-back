@@ -6,5 +6,5 @@ import lombok.Data;
 public class MyBookReqDto {
     private int userid;
     private int page;
-    private int option;
+    private int filter;
 }

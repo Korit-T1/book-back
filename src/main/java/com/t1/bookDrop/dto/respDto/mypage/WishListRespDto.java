@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 public class WishListRespDto {
     private int wishId;
     private int bookId;
+    private int reviewCount;
+    private float avgRating;
     private String bookName;
     private String authorName;
     private String publisherName;

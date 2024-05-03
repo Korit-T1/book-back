@@ -21,8 +21,9 @@ public interface BookMapper {
     public List<Book> findBooksAll(
             @Param("index") int index,
             @Param("count") int count,
-            @Param("option")int option,
-            @Param("text")String text);
+            @Param("option") int option,
+            @Param("filter") int filter,
+            @Param("text") String text);
 
 
     public int getBookCount(
