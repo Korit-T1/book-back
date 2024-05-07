@@ -23,9 +23,11 @@ public class NoticeService {
         noticeMapper.saveNotice(noticeBoardReqDto.toEntity());
     }
 
-    public List<NoticeRespDto> getNotice(int noticeBoardId){
-        return noticeMapper.findNoticeAllByNoticeBoardId(noticeBoardId).stream().map(Notice::toDto).collect(Collectors.toList());
+    public NoticeRespDto getNotice(int noticeBoardId) {
+        Notice notice = noticeMapper.findNoticeByNoticeBoardId(noticeBoardId);
+        return notice != null ? notice.toDto() : null;
     }
+
 
     @Transactional(rollbackFor = Exception.class)
     public void deleteNotice(List<Integer> noticeIds) {

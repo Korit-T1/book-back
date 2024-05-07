@@ -29,7 +29,7 @@ public class AdminNoticeController {
     }
 
     @GetMapping("/getNotice/{noticeBoardId}")
-    public ResponseEntity<List<NoticeRespDto>> findNotice(@PathVariable int noticeBoardId){
+    public ResponseEntity<NoticeRespDto> findNotice(@PathVariable int noticeBoardId){
         return ResponseEntity.ok(noticeService.getNotice(noticeBoardId));
     }
 
