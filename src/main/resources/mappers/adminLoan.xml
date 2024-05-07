@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.t1.bookDrop.repository.AdminLoanMapper">
+    <resultMap id="BookResultMap" type="com.t1.bookDrop.entity.Book">
+        <id property="bookId" column="book_id" />
+        <result property="isbn" column="isbn" />
+        <result property="categoryId" column="category_id" />
+        <result property="bookName" column="book_name" />
+        <result property="authorName" column="author_name" />
+        <result property="publisherName" column="publisher_name" />
+        <result property="coverImgUrl" column="cover_img_url" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+        <result property="publishDate" column="publish_date" />
+    </resultMap>
+
+    <resultMap id="BookStockResultMap" type="com.t1.bookDrop.entity.BookStock">
+        <id property="bookStockId" column="book_stock_id"/>
+        <result property="bookId" column="book_id"/>
+    </resultMap>
+
+    <resultMap id="UserResultMap" type="com.t1.bookDrop.entity.User">
+        <id property="userId" column="user_id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="name" column="name" />
+        <result property="email" column="email" />
+        <result property="phone" column="phone" />
+        <result property="address" column="address" />
+        <result property="gender" column="gender" />
+        <result property="age" column="age" />
+        <result property="birth" column="birth" />
+        <result property="profileUrl" column="profile_Url" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
+    <resultMap id="adminLonaMap" type="com.t1.bookDrop.entity.AdminLoan">
+        <id property="loanId" column="loan_id" />
+        <result property="userId" column="user_id" />
+        <result property="bookStockId" column="book_stock_id" />
+        <result property="loanDate" column="loan_date" />
+        <result property="dueDate" column="due_date" />
+        <result property="returnDate" column="return_date" />
+        <association property="book" resultMap="BookResultMap" />
+        <association property="user" resultMap="UserResultMap"/>
+    </resultMap>
+
+    <select id="getAdminLoan" parameterType="int" resultMap="adminLonaMap">
+        select
+        lt.loan_id,
+        lt.book_stock_id,
+        ut.username,
+        ut.address,
+        ut.name,
+        ut.email,
+        ut.phone,
+        bt.book_name,
+        bt.cover_img_url,
+        lt.loan_date,
+        lt.due_date
+        from
+        loan_tb lt
+        left outer join user_tb ut on(ut.user_id = lt.user_id)
+        left outer join book_stock_tb bst on(bst.book_stock_id = lt.book_stock_id)
+        left outer join book_tb bt on(bt.book_id = bst.book_id)
+        where
+        lt.return_date is null;
+    </select>
+</mapper>
