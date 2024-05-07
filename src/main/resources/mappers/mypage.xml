@@ -105,22 +105,26 @@
             left outer join book_stock_tb bst on(bst.book_stock_id = lt.book_stock_id)
             left outer join book_tb bt on(bt.book_id = bst.book_id)
         where
-        1 = 1
-            and ut.user_id = #{userid}
+            ut.user_id = #{userid}
             and lt.return_date is not null
-            <if test="filter == 0"></if>
-            <if test="filter == 1">
-                and lt.due_date > lt.return_date
-            </if>
-            <if test="filter == 2">
-                and lt.due_date > lt.return_date
-            </if>
             <if test="filter == 3">
                 and lt.due_date > lt.return_date
             </if>
             <if test="filter == 4">
                 and lt.return_date > lt.due_date
             </if>
+        order by
+            <choose>
+                <when test="filter == 1">
+                    lt.return_date DESC
+                </when>
+                <when test="filter == 2">
+                    lt.return_date
+                </when>
+                <otherwise>
+                    lt.loan_id
+                </otherwise>
+            </choose>
         limit
             #{index}, 6;
     </select>
@@ -134,7 +138,13 @@
             left outer join book_tb bt on(bt.book_id = bst.book_id)
         where
             user_id = #{userid}
-            and lt.return_date is not null;
+            and lt.return_date is not null
+            <if test="filter == 3">
+                and lt.due_date > lt.return_date
+            </if>
+            <if test="filter == 4">
+                and lt.return_date > lt.due_date
+            </if>
     </select>
 
     <select id="getWishList" parameterType="int" resultMap="WishResultMap">
@@ -162,24 +172,21 @@
             user_id = #{userid}
         order by
             <choose>
-                <when test="filter == 0">
-                    bt.book_id
-                </when>
                 <when test="filter == 1">
-                    temp_rating_tb.average_rating DESC
+                    wt.wish_id
                 </when>
                 <when test="filter == 2">
-                    temp_rating_tb.average_rating
+                    temp_rating_tb.average_rating DESC
                 </when>
                 <when test="filter == 3">
-                    temp_rating_tb.review_count DESC
+                    temp_rating_tb.average_rating
                 </when>
                 <when test="filter == 4">
+                    temp_rating_tb.review_count DESC
+                </when>
+                <when test="filter == 5">
                     temp_rating_tb.review_count
                 </when>
-                <!--                <otherwise>-->
-                <!--                    -->
-                <!--                </otherwise>-->
             </choose>
         limit
             #{index}, 6
@@ -258,7 +265,7 @@
             left outer join book_tb bt on(bt.book_id = bst.book_id)
             left outer join category_tb ct on(ct.category_id = bt.category_id)
         where
-            lt.user_id = 10
+            lt.user_id = #{userid}
         group by
             bt.book_id
         order by
