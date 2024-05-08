@@ -71,6 +71,8 @@
         where
             ut.user_id = #{userid}
             and lt.return_date is null
+        order by
+            lt.due_date
         limit
             #{index}, 6;
     </select>
@@ -272,7 +274,5 @@
             count DESC
         LIMIT 1;
     </select>
-
-
 
 </mapper>
