@@ -19,4 +19,6 @@ public class AdminLoanRespDto {
     private String coverImgUrl;
     private LocalDateTime loanDate;
     private LocalDateTime dueDate;
+    private LocalDateTime returnDate;
+    private int returnOrNot;
 }

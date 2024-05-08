@@ -19,6 +19,7 @@ public class AdminLoan {
     private LocalDateTime loanDate;
     private LocalDateTime dueDate;
     private LocalDateTime returnDate;
+    private int returnOrNot;
 
     private Book book;
     private User user;
@@ -36,6 +37,8 @@ public class AdminLoan {
                 .coverImgUrl(book.getCoverImgUrl())
                 .loanDate(loanDate)
                 .dueDate(dueDate)
+                .returnDate(returnDate)
+                .returnOrNot(returnOrNot)
                 .build();
     }
 }

@@ -19,6 +19,7 @@ public class Loan {
     private LocalDateTime loanDate;
     private LocalDateTime dueDate;
     private LocalDateTime returnDate;
+    private int returnOrNot;
 
     private Book book;
 
