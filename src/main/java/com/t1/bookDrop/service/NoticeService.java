@@ -1,6 +1,7 @@
 package com.t1.bookDrop.service;
 
 import com.t1.bookDrop.dto.reqDto.NoticeReqDto;
+import com.t1.bookDrop.dto.reqDto.SearchNoticeReqDto;
 import com.t1.bookDrop.dto.reqDto.UpdateNoticeReqDto;
 import com.t1.bookDrop.dto.respDto.NoticeRespDto;
 import com.t1.bookDrop.entity.Notice;
@@ -28,6 +29,16 @@ public class NoticeService {
         return notice != null ? notice.toDto() : null;
     }
 
+    public List<NoticeRespDto> getNoticeAll(SearchNoticeReqDto searchNoticeReqDto) {
+        int index = (searchNoticeReqDto.getPage() - 1) * 20;
+        List<Notice> notices = noticeMapper.findNoticeAll(
+                index,
+                searchNoticeReqDto.getCount(),
+                searchNoticeReqDto.getOption(),
+                searchNoticeReqDto.getText()
+        );
+        return notices.stream().map(Notice::toDto).collect(Collectors.toList());
+    }
 
     @Transactional(rollbackFor = Exception.class)
     public void deleteNotice(List<Integer> noticeIds) {
