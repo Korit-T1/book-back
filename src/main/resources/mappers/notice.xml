@@ -34,18 +34,33 @@
 
     <select id="findNoticeByNoticeBoardId" resultMap="NoticeResultMap">
         select
-        nt.notice_board_id,
-        nt.notice_board_category_id,
-        nt.title,
-        nt.content,
-        nt.create_date,
-        nt.update_date,
-        nct.notice_board_category_name
+            nt.notice_board_id,
+            nt.notice_board_category_id,
+            nt.title,
+            nt.content,
+            nt.create_date,
+            nt.update_date,
+            nct.notice_board_category_name
         from
-        notice_board_tb nt
-        left outer join notice_board_category_tb nct on(nct.notice_board_category_id = nt.notice_board_category_id)
+            notice_board_tb nt
+            left outer join notice_board_category_tb nct on(nct.notice_board_category_id = nt.notice_board_category_id)
         where
-        nt.notice_board_id = #{noticeBoardId}
+            nt.notice_board_id = #{noticeBoardId}
+    </select>
+
+    <select id="findNoticeAll" resultMap="NoticeResultMap">
+        select
+            nt.notice_board_id,
+            nt.notice_board_category_id,
+            nt.title,
+            nt.content,
+            nt.create_date,
+            nt.update_date,
+            nct.notice_board_category_name
+        from
+            notice_board_tb nt
+            left outer join notice_board_category_tb nct on(nct.notice_board_category_id = nt.notice_board_category_id)
+
     </select>
 
     <delete id="deleteNoticeByNoticeIds" parameterType="list">
