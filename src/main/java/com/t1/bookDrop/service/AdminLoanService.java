@@ -14,8 +14,14 @@ public class AdminLoanService {
     @Autowired
     AdminLoanMapper adminLoanMapper;
 
+
     public List<AdminLoanRespDto> getLoans() {
         return adminLoanMapper.getAdminLoan().stream().map(AdminLoan::toAdminLoanRespDto).collect(Collectors.toList());
     }
-
+    public List<AdminLoanRespDto> gteReturns() {
+        return adminLoanMapper.getAdminReturn().stream().map(AdminLoan::toAdminLoanRespDto).collect(Collectors.toList());
+    }
+    public void updateReturn(int loanId){
+        adminLoanMapper.updateReturnOrNot(loanId);
+    }
 }

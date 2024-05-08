@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface AdminLoanMapper {
     public List<AdminLoan> getAdminLoan();
+    public List<AdminLoan> getAdminReturn();
+    public int updateReturnOrNot(int loanId);
 }

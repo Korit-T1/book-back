@@ -45,11 +45,12 @@
         <result property="loanDate" column="loan_date" />
         <result property="dueDate" column="due_date" />
         <result property="returnDate" column="return_date" />
+        <result property="returnOrNot" column="return_or_not"/>
         <association property="book" resultMap="BookResultMap" />
         <association property="user" resultMap="UserResultMap"/>
     </resultMap>
 
-    <select id="getAdminLoan" parameterType="int" resultMap="adminLonaMap">
+    <select id="getAdminLoan" resultMap="adminLonaMap">
         select
         lt.loan_id,
         lt.book_stock_id,
@@ -70,4 +71,36 @@
         where
         lt.return_date is null;
     </select>
+    <select id="getAdminReturn" resultMap="adminLonaMap">
+        select
+        lt.loan_id,
+        lt.book_stock_id,
+        ut.username,
+        ut.address,
+        ut.name,
+        ut.email,
+        ut.phone,
+        bt.book_name,
+        bt.cover_img_url,
+        lt.loan_date,
+        lt.due_date,
+        lt.return_date,
+        lt.return_or_not
+        from
+        loan_tb lt
+        left outer join user_tb ut on(ut.user_id = lt.user_id)
+        left outer join book_stock_tb bst on(bst.book_stock_id = lt.book_stock_id)
+        left outer join book_tb bt on(bt.book_id = bst.book_id)
+        where
+        extract(month from now()) = extract(month from return_date)
+        and extract(year from now()) = extract(year from return_date);
+    </select>
+    <update id="updateReturnOrNot" parameterType="int">
+        update
+        loan_tb
+        set
+        return_or_not = 2
+        where
+        loan_id = #{loanId}
+    </update>
 </mapper>
