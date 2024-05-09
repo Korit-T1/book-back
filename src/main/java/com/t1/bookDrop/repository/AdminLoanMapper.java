@@ -10,4 +10,5 @@ public interface AdminLoanMapper {
     public List<AdminLoan> getAdminLoan();
     public List<AdminLoan> getAdminReturn();
     public int updateReturnOrNot(int loanId);
+    public List<AdminLoan> getAdminOverdue();
 }

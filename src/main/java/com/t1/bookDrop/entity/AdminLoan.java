@@ -20,6 +20,7 @@ public class AdminLoan {
     private LocalDateTime dueDate;
     private LocalDateTime returnDate;
     private int returnOrNot;
+    private Long timeDifference;
 
     private Book book;
     private User user;
@@ -39,6 +40,7 @@ public class AdminLoan {
                 .dueDate(dueDate)
                 .returnDate(returnDate)
                 .returnOrNot(returnOrNot)
+                .timeDifference(timeDifference)
                 .build();
     }
 }

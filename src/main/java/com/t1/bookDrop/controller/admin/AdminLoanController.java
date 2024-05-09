@@ -28,4 +28,8 @@ public class AdminLoanController {
         adminLoanService.updateReturn(loanId);
         return ResponseEntity.ok(true);
     }
+    @GetMapping("/adminOverdue")
+    public ResponseEntity<?> getOverdue() {
+        return ResponseEntity.ok(adminLoanService.getOverdues());
+    }
 }

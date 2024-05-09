@@ -24,4 +24,7 @@ public class AdminLoanService {
     public void updateReturn(int loanId){
         adminLoanMapper.updateReturnOrNot(loanId);
     }
+    public List<AdminLoanRespDto> getOverdues() {
+        return adminLoanMapper.getAdminOverdue().stream().map(AdminLoan::toAdminLoanRespDto).collect(Collectors.toList());
+    }
 }

@@ -21,4 +21,5 @@ public class AdminLoanRespDto {
     private LocalDateTime dueDate;
     private LocalDateTime returnDate;
     private int returnOrNot;
+    private Long timeDifference;
 }
