@@ -46,6 +46,7 @@
         <result property="dueDate" column="due_date" />
         <result property="returnDate" column="return_date" />
         <result property="returnOrNot" column="return_or_not"/>
+        <result property="timeDifference" column="time_difference"/>
         <association property="book" resultMap="BookResultMap" />
         <association property="user" resultMap="UserResultMap"/>
     </resultMap>
@@ -103,4 +104,31 @@
         where
         loan_id = #{loanId}
     </update>
+    <select id="getAdminOverdue" resultMap="adminLonaMap">
+        select
+        lt.loan_id,
+        lt.book_stock_id,
+        ut.username,
+        ut.address,
+        ut.name,
+        ut.email,
+        ut.phone,
+        bt.book_name,
+        bt.cover_img_url,
+        lt.loan_date,
+        lt.due_date,
+        lt.return_date,
+        timestampdiff(day, lt.due_date , now()) as time_difference
+        from
+        loan_tb lt
+        left outer join user_tb ut on(ut.user_id = lt.user_id)
+        left outer join book_stock_tb bst on(bst.book_stock_id = lt.book_stock_id)
+        left outer join book_tb bt on(bt.book_id = bst.book_id)
+        where
+        lt.return_date is null
+        and now() >= lt.due_date
+        and extract(month from now()) = extract(month from due_date)
+        and extract(year from now()) = extract(year from due_date);
+    </select>
+
 </mapper>
