@@ -39,7 +39,10 @@ public class AdminNoticeController {
         return ResponseEntity.ok(noticeService.getNoticeAll(searchNoticeReqDto));
     }
 
-
+    @GetMapping("/notice/count")
+    public ResponseEntity<?> searchNoticeCount(SearchNoticeReqDto searchNoticeReqDto) {
+        return ResponseEntity.ok(noticeService.getNoticeCount(searchNoticeReqDto));
+    }
 
     @DeleteMapping("/notice")
     public ResponseEntity<?> deleteNotice(@RequestBody List<Integer> noticeIds) {
