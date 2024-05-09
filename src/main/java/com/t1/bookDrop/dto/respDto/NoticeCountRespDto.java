@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Builder
 @Data
-public class SearchNoticeCountRespDto {
+public class NoticeCountRespDto {
     private int totalCount;
 }

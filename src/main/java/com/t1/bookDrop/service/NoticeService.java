@@ -3,6 +3,7 @@ package com.t1.bookDrop.service;
 import com.t1.bookDrop.dto.reqDto.NoticeReqDto;
 import com.t1.bookDrop.dto.reqDto.SearchNoticeReqDto;
 import com.t1.bookDrop.dto.reqDto.UpdateNoticeReqDto;
+import com.t1.bookDrop.dto.respDto.NoticeCountRespDto;
 import com.t1.bookDrop.dto.respDto.NoticeRespDto;
 import com.t1.bookDrop.entity.Notice;
 import com.t1.bookDrop.repository.NoticeMapper;
@@ -30,7 +31,7 @@ public class NoticeService {
     }
 
     public List<NoticeRespDto> getNoticeAll(SearchNoticeReqDto searchNoticeReqDto) {
-        int index = (searchNoticeReqDto.getPage() - 1) * 20;
+        int index = (searchNoticeReqDto.getPage() - 1) * 10;
         List<Notice> notices = noticeMapper.findNoticeAll(
                 index,
                 searchNoticeReqDto.getCount(),
@@ -38,6 +39,16 @@ public class NoticeService {
                 searchNoticeReqDto.getText()
         );
         return notices.stream().map(Notice::toDto).collect(Collectors.toList());
+    }
+
+    public NoticeCountRespDto getNoticeCount(SearchNoticeReqDto searchNoticeReqDto) {
+        int noticeCount = noticeMapper.getBookCount(
+                searchNoticeReqDto.getOption(),
+                searchNoticeReqDto.getText()
+        );
+        return NoticeCountRespDto.builder()
+                .totalCount(noticeCount)
+                .build();
     }
 
     @Transactional(rollbackFor = Exception.class)

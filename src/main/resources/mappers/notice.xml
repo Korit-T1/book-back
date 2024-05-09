@@ -60,7 +60,41 @@
         from
             notice_board_tb nt
             left outer join notice_board_category_tb nct on(nct.notice_board_category_id = nt.notice_board_category_id)
+        where
+        1 = 1
+            <if test="option == 0">
+                and nt.title like concat('%', #{text}, '%')
+            </if>
+            <if test="option == 1">
+                and nt.title like concat('%', #{text}, '%')
+                and nct.notice_board_category_name = 'news'
+            </if>
+            <if test="option == 2">
+                and nt.title like concat('%', #{text}, '%')
+                and nct.notice_board_category_name = 'event'
+            </if>
+        limit #{index}, 10
+    </select>
 
+    <select id="getBookCount" resultType="integer">
+        select
+            count(*)
+        from
+            notice_board_tb nt
+            left outer join notice_board_category_tb nct on(nct.notice_board_category_id = nt.notice_board_category_id)
+        <choose>
+            <when test="option == 0">
+                where nt.title like concat('%', #{text}, '%')
+            </when>
+            <when test="option == 1">
+                where nct.notice_board_category_name = 'news'
+                and nt.title like concat('%', #{text}, '%')
+            </when>
+            <when test="option == 2">
+                where nct.notice_board_category_name = 'event'
+                and nt.title like concat('%', #{text}, '%')
+            </when>
+        </choose>
     </select>
 
     <delete id="deleteNoticeByNoticeIds" parameterType="list">
