@@ -1,5 +1,6 @@
 package com.t1.bookDrop.entity;
 
+import com.t1.bookDrop.dto.respDto.AdminUserRespDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +19,17 @@ public class AdminUser {
     private String address;
     private String gender;
     private String birth;
+
+    public AdminUserRespDto toAdminUserRespDto() {
+        return AdminUserRespDto.builder()
+                .userId(userId)
+                .username(username)
+                .name(name)
+                .email(email)
+                .phone(phone)
+                .address(address)
+                .gender(gender)
+                .birth(birth)
+                .build();
+    }
 }
