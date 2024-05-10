@@ -6,9 +6,40 @@
 
 <mapper namespace="com.t1.bookDrop.repository.AdminUserMapper">
     <resultMap id="AdminUserResultMap" type="com.t1.bookDrop.entity.AdminUser">
-
+        <id property="userId" column="user_id"/>
+        <result property="username" column="username"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+        <result property="gender" column="gender"/>
+        <result property="birth" column="birth"/>
     </resultMap>
     <select id="findUser" resultMap="AdminUserResultMap">
-        
+        select
+            ut.user_id,
+            ut.username,
+            ut.name,
+            ut.email,
+            ut.phone,
+            ut.address,
+            ut.gender,
+            ut.age,
+            ut.birth
+        from
+            user_tb ut
+        where
+        1 = 1
+        <if test="username != null and !username.equals('')">
+            and ut.username like concat("%", #{username}, "%")
+        </if>
+        <if test="name != null and !name.equals('')">
+            and ut.name like concat("%", #{name}, "%")
+        </if>
+
+
+
+
+
     </select>
 </mapper>
