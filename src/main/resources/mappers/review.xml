@@ -9,6 +9,7 @@
         <id property="reviewId" column="review_id"/>
         <result property="bookId" column="book_id"/>
         <result property="userId" column="user_id"/>
+        <result property="username" column="username"/>
         <result property="content" column="content"/>
         <result property="rating" column="rating"/>
         <result property="createDate" column="create_date"/>
@@ -31,14 +32,15 @@
         select
             rt.book_id,
             rt.user_id,
+            ut.username,
             rt.content,
             rt.rating,
             rt.create_date
         from
             review_tb rt
+            left outer join user_tb ut on(ut.user_id = rt.user_id)
         where
             rt.book_id = #{bookId}
-
     </select>
 
 

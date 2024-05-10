@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,11 +17,13 @@ public class BookStock {
     private int bookId;
     private Loan loan;
     private int loanStatus;
+    private LocalDateTime dueDate;
 
     public GetBookStocksRespDto toDto() {
         return GetBookStocksRespDto.builder()
                 .bookStockId(bookStockId)
                 .loanStatus(loanStatus)
+                .dueDate(dueDate)
                 .build();
     }
 }

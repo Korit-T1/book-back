@@ -11,4 +11,5 @@ import java.time.LocalDateTime;
 public class GetBookStocksRespDto {
     private int bookStockId;
     private int loanStatus;
+    private LocalDateTime dueDate;
 }

@@ -16,6 +16,7 @@ public class Review {
     private int reviewId;
     private int bookId;
     private int userId;
+    private String username;
     private String content;
     private float rating;
     private LocalDateTime createDate;
@@ -23,6 +24,7 @@ public class Review {
 
     public ReviewRespDto toDto() {
         return ReviewRespDto.builder()
+                .username(username)
                 .content(content)
                 .rating(rating)
                 .createDate(createDate)

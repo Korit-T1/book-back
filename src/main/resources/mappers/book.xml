@@ -29,6 +29,7 @@
         <id property="bookStockId" column="book_stock_id"/>
         <result property="bookId" column="book_id"/>
         <result property="loanStatus" column="loan_status"/>
+        <result property="dueDate" column="due_date"/>
         <association property="loan" resultMap="LoanResultMap" />
     </resultMap>
 
