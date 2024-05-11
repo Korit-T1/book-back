@@ -22,6 +22,7 @@
         <result property="updateDate" column="update_date" />
         <result property="publishDate" column="publish_date" />
         <result property="averageRating" column="average_rating"/>
+        <result property="reviewCount" column="review_count"/>
         <association property="category" resultMap="CategoryResultMap"/>
     </resultMap>
 
@@ -104,15 +105,17 @@
             bt.update_date,
             bt.publish_date,
             ct.category_name,
-            temp_rating_tb.average_rating
+            temp_rating_tb.average_rating,
+            temp_rating_tb.review_count
         from
             book_tb bt
             left outer join category_tb ct on(ct.category_id = bt.category_id)
             left outer join (
                 select
                     book_id,
-                    avg(rating) as average_rating
-                from
+                    avg(rating) as average_rating,
+                    count(book_id) as review_count
+        from
                     review_tb
                 group by
                     book_id) temp_rating_tb on(temp_rating_tb.book_id = bt.book_id)
@@ -136,20 +139,20 @@
             </if>
         order by
             <choose>
-                <when test="filter == 0">
+                <when test="filter == 1">
                     bt.book_id
                 </when>
-                <when test="filter == 1">
-                    temp_rating_tb.average_rating DESC
-                </when>
                 <when test="filter == 2">
-                    temp_rating_tb.average_rating
+                    temp_rating_tb.average_rating DESC
                 </when>
                 <when test="filter == 3">
-                    temp_rating_tb.average_rating DESC
+                    temp_rating_tb.average_rating
                 </when>
                 <when test="filter == 4">
-                    temp_rating_tb.average_rating
+                    temp_rating_tb.review_count DESC
+                </when>
+                <when test="filter == 5">
+                    temp_rating_tb.review_count
                 </when>
 <!--                <otherwise>-->
 <!--                    -->
