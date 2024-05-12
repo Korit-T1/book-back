@@ -54,7 +54,35 @@
         where
             username = #{username}
     </select>
-
+    <select id="findUser" resultMap="UserResultMap">
+        select
+            ut.user_id,
+            ut.username,
+            ut.password,
+            ut.name,
+            ut.email,
+            ut.phone,
+            ut.address,
+            ut.gender,
+            ut.age,
+            ut.birth
+        from
+            user_tb ut
+        where
+            1 = 1
+            <if test="username">
+                and ut.username like concat("%", #{username}, "%")
+            </if>
+            <if test="name">
+                and ut.name like concat("%", #{name}, "%")
+            </if>
+            <if test="email">
+                and ut.email like concat("%", #{email}, "%")
+            </if>
+            <if test="phone">
+                and ut.phone like concat("%", #{phone}, "%")
+            </if>
+    </select>
     <update id="modifyPassword" parameterType="com.t1.bookDrop.entity.User">
         update
             user_tb

@@ -25,7 +25,8 @@ public class PermitAllFilter extends GenericFilter {
                 "/search",
                 "/searchUserInfo",
                 "/admin/getNotice",
-                "/adminUser"
+                "/adminUser",
+                "/account/passwords"
         );
 
         String uri = request.getRequestURI();

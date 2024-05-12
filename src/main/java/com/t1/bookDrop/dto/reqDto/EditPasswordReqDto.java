@@ -8,7 +8,12 @@ import javax.validation.constraints.Pattern;
 @Data
 public class EditPasswordReqDto {
 
-    @NotBlank
+    private String userId;
+    private String username;
+    private String name;
+    private String phone;
+    private String email;
+
     private String oldPassword;
 
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{7,128}$",

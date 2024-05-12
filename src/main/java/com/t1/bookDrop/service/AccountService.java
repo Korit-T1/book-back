@@ -5,8 +5,10 @@ package com.t1.bookDrop.service;
 //import com.study.library.exception.ValidException;
 //import com.study.library.repository.UserMapper;
 import com.t1.bookDrop.dto.reqDto.EditPasswordReqDto;
+import com.t1.bookDrop.entity.AdminUser;
 import com.t1.bookDrop.entity.User;
 import com.t1.bookDrop.exception.ValidException;
+import com.t1.bookDrop.repository.AdminUserMapper;
 import com.t1.bookDrop.repository.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -48,6 +50,33 @@ public class AccountService {
         userMapper.modifyPassword(user);
 
     }
+
+    public void editPasswords(EditPasswordReqDto editPasswordReqDto) {
+        User user = userMapper.findUser(
+//                editPasswordReqDto.getUserId(),
+                editPasswordReqDto.getUsername(),
+                editPasswordReqDto.getName(),
+                editPasswordReqDto.getEmail(),
+                editPasswordReqDto.getPhone()
+        );
+        System.out.println(user);
+        if (user == null) {
+            throw new ValidException(Map.of("userInfo", "회원 정보가 없습니다."));
+        }
+
+        if (!editPasswordReqDto.getNewPassword().equals(editPasswordReqDto.getNewPasswordCheck())) {
+            throw new ValidException(Map.of("newPasswordCheck", "비밀번호 불일치\n다시 입력 바랍니다."));
+        }
+
+        // 비밀번호 업데이트
+        user.setPassword(passwordEncoder.encode(editPasswordReqDto.getNewPassword()));
+
+        // 수정된 사용자 정보를 업데이트
+        userMapper.modifyPassword(user);
+    }
+
+
+
 
 
 
