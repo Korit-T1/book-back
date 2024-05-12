@@ -19,6 +19,7 @@ public class AdminUser {
     private String address;
     private String gender;
     private String birth;
+    private int overdue;
 
     public AdminUserRespDto toAdminUserRespDto() {
         return AdminUserRespDto.builder()
@@ -30,6 +31,7 @@ public class AdminUser {
                 .address(address)
                 .gender(gender)
                 .birth(birth)
+                .overdue(overdue)
                 .build();
     }
 }

@@ -20,23 +20,8 @@ public class AdminBookController {
     @Autowired
     private BookInfoService bookInfoService;
 
-    @ParamsPrintAspect
-    @ValidAspect
-    @PostMapping("/book")
-    public ResponseEntity<?> saveBook( @Valid @RequestBody RegisterBookReqDto registerBookReqDto, BindingResult bindingResult) {
-        bookInfoService.saveBook(registerBookReqDto);
-        return ResponseEntity.created(null).body(true);
-    }
 
-//    @GetMapping("/book/{bookId}")
-//    public ResponseEntity<?> searchBookInfo(@PathVariable int bookId) {
-//        return ResponseEntity.ok(bookInfoService.searchBookInfo(bookId));
-//    }
 
-//    @GetMapping("/book/count")
-//    public ResponseEntity<?> getCount(SearchBooksReqDto searchBooksReqDto) {
-//        return ResponseEntity.ok(bookService.getBookCount(searchBooksReqDto));
-//    }
 
     @DeleteMapping("/book")
     public  ResponseEntity<?> deleteBook(@RequestBody List<Integer> bookIds) {
