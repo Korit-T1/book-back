@@ -6,4 +6,6 @@ import lombok.Data;
 public class AdminUserReqDto {
     private String username;
     private String name;
+    private String email;
+    private String phone;
 }

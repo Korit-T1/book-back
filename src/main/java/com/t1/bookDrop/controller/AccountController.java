@@ -38,4 +38,5 @@ public class AccountController {
 
         return ResponseEntity.ok(true);
     }
+
 }

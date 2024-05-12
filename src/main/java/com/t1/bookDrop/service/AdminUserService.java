@@ -21,7 +21,9 @@ public class AdminUserService {
 
         List<AdminUser> users = adminUserMapper.findUser(
                 adminUserReqDto.getUsername(),
-                adminUserReqDto.getName()
+                adminUserReqDto.getName(),
+                adminUserReqDto.getEmail(),
+                adminUserReqDto.getPhone()
         );
         System.out.println(users);
         return users.stream().map(AdminUser::toAdminUserRespDto).collect(Collectors.toList());
