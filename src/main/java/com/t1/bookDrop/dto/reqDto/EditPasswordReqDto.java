@@ -8,11 +8,7 @@ import javax.validation.constraints.Pattern;
 @Data
 public class EditPasswordReqDto {
 
-    private String userId;
-    private String username;
-    private String name;
-    private String phone;
-    private String email;
+    private int userId;
 
     private String oldPassword;
 

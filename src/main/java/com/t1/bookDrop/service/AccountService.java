@@ -52,12 +52,8 @@ public class AccountService {
     }
 
     public void editPasswords(EditPasswordReqDto editPasswordReqDto) {
-        User user = userMapper.findUser(
-//                editPasswordReqDto.getUserId(),
-                editPasswordReqDto.getUsername(),
-                editPasswordReqDto.getName(),
-                editPasswordReqDto.getEmail(),
-                editPasswordReqDto.getPhone()
+        User user = userMapper.findUserByUserId(
+                editPasswordReqDto.getUserId()
         );
         System.out.println(user);
         if (user == null) {

@@ -16,13 +16,11 @@ public interface UserMapper {
     public int saveOAuth2(OAuth2 oAuth2);
     public int modifyPassword(User user);
     // userCheck, findUserByUsername 확인 필요
-
+    public User findUserByUserId(int userId);
     public User findUser(
-//            @Param("userId") int userId,
             @Param("username") String username,
             @Param("name") String name,
             @Param("email") String email,
             @Param("phone") String phone
     );
-
 }
