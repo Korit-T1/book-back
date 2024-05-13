@@ -32,10 +32,12 @@
             user_tb ut
             left outer join (
                 select
-                user_id,
-                count(return_date > due_date) as overdue
+                lt.user_id,
+                count(lt.user_id) as overdue
                 from
                 loan_tb lt
+                where
+                return_date > due_date
                 group by
                 user_id
             ) overdue_tb on (overdue_tb.user_id = ut.user_id)
