@@ -15,7 +15,7 @@ public class AdminUserController {
     private AdminUserService adminUserService;
 
     @GetMapping("/adminUser")
-    public ResponseEntity<?> getUser(AdminUserReqDto adminUserReqDto) {
+    public ResponseEntity<?> getUser(@RequestBody AdminUserReqDto adminUserReqDto) {
         return ResponseEntity.ok(adminUserService.getUsers(adminUserReqDto));
     }
 
