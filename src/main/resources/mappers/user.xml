@@ -54,6 +54,27 @@
         where
             username = #{username}
     </select>
+    <select id="findUserByUserId" parameterType="integer" resultMap="UserResultMap">
+        select
+            user_id,
+            username,
+            password,
+            name,
+            email,
+            phone,
+            address,
+            gender,
+            age,
+            birth,
+            profile_url,
+            create_date,
+            update_date
+        from
+            user_tb
+        where
+            user_id = #{userId}
+    </select>
+
     <select id="findUser" resultMap="UserResultMap">
         select
             ut.user_id,
