@@ -14,4 +14,5 @@ public class AdminUserRespDto {
     private String address;
     private String gender;
     private String birth;
+    private int overdue;
 }

@@ -18,7 +18,7 @@ public class ReviewService {
     private ReviewMapper reviewMapper;
 
     @Transactional(rollbackFor = Exception.class)
-    public void saveReview(ReviewReqDto reviewReqDto) {
+    public void saveReview(ReviewReqDto reviewReqDto)    {
         reviewMapper.saveReview(reviewReqDto.toEntity());
     }
 
