@@ -79,14 +79,9 @@
         select
             ut.user_id,
             ut.username,
-            ut.password,
             ut.name,
             ut.email,
-            ut.phone,
-            ut.address,
-            ut.gender,
-            ut.age,
-            ut.birth
+            ut.phone
         from
             user_tb ut
         where

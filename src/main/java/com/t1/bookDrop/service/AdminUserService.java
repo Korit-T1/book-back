@@ -43,7 +43,6 @@ public class AdminUserService {
                 adminUserReqDto.getEmail(),
                 adminUserReqDto.getPhone()
         );
-        System.out.println(user);
         return AdminUserRespDto.builder()
                 .userId(user.getUserId())
                 .username(user.getUsername())
