@@ -38,4 +38,11 @@ public class AccountController {
 
         return ResponseEntity.ok(true);
     }
+
+    @ValidAspect
+    @PutMapping("/passwords")
+    public ResponseEntity<?> editPasswords(@Valid @RequestBody EditPasswordReqDto editPasswordReqDto, BindingResult bindingResult) {
+        accountService.editPasswords(editPasswordReqDto);
+        return ResponseEntity.ok(true);
+    }
 }
