@@ -24,6 +24,7 @@ public class Review {
 
     public ReviewRespDto toDto() {
         return ReviewRespDto.builder()
+                .reviewId(reviewId)
                 .username(username)
                 .content(content)
                 .rating(rating)

@@ -1,6 +1,7 @@
 package com.t1.bookDrop.controller;
 
 import com.t1.bookDrop.aop.annotation.ValidAspect;
+import com.t1.bookDrop.dto.reqDto.FindReviewReqDto;
 import com.t1.bookDrop.dto.reqDto.ReviewReqDto;
 import com.t1.bookDrop.dto.respDto.ReviewRespDto;
 import com.t1.bookDrop.service.ReviewService;
@@ -26,9 +27,14 @@ public class ReviewController {
         return ResponseEntity.created(null).body(true);
     }
 
-    @GetMapping("/getReview/{bookId}")
-    public ResponseEntity<List<ReviewRespDto>> findReviews(@PathVariable int bookId){
-        return ResponseEntity.ok(reviewService.getReview(bookId));
+    @GetMapping("/getReview")
+    public ResponseEntity<List<ReviewRespDto>> findReviews(FindReviewReqDto findReviewReqDto){
+        return ResponseEntity.ok(reviewService.getReview(findReviewReqDto));
+    }
+
+    @GetMapping("/review/count")
+    public ResponseEntity<?> findReviewCount(FindReviewReqDto findReviewReqDto){
+        return ResponseEntity.ok(reviewService.getReviewCount(findReviewReqDto));
     }
 
 }

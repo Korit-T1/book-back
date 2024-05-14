@@ -28,8 +28,10 @@
             null
         )
     </insert>
+
     <select id="findReviewsAllByBookId" resultMap="ReviewResultMap">
         select
+            rt.review_id,
             rt.book_id,
             rt.user_id,
             ut.username,
@@ -40,7 +42,19 @@
             review_tb rt
             left outer join user_tb ut on(ut.user_id = rt.user_id)
         where
-            rt.book_id = #{bookId}
+            rt.book_id = #{book_id}
+        limit
+            #{index}, 4
+    </select>
+
+    <select id="findReviewCount" resultType="int">
+        select
+            count(*)
+        from
+            review_tb rt
+            left outer join user_tb ut on(ut.user_id = rt.user_id)
+        where
+            rt.book_id = #{book_id}
     </select>
 
 
