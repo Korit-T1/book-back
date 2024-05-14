@@ -26,7 +26,7 @@ public class JwtAuthenticationFilter extends GenericFilter {
         Boolean isPermitAll = (Boolean) request.getAttribute("isPermitAll");
         System.out.println("isPermitAll: " + isPermitAll);
 
-        if(!isPermitAll) {
+        if(!isPermitAll/*isPermitAll != null && isPermitAll*/) {
             String accessToken = request.getHeader("Authorization");
             String removedBearerToken = jwtProvider.removeBearer(accessToken);
             System.out.println("removedBearerToken: " + removedBearerToken);

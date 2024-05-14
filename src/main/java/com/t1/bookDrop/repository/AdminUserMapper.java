@@ -11,6 +11,8 @@ import java.util.List;
 public interface AdminUserMapper {
     public List<AdminUser> findUser(
             @Param("username") String username,
-            @Param("name") String name
+            @Param("name") String name,
+            @Param("email") String email,
+            @Param("phone") String phone
     );
 }

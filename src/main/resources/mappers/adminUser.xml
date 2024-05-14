@@ -49,10 +49,11 @@
         <if test="name != null and !name.equals('')">
             and ut.name like concat("%", #{name}, "%")
         </if>
-
-
-
-
-
+        <if test="email != null and !email.equals('')">
+            and ut.email like concat("%", #{email}, "%")
+        </if>
+        <if test="phone != null and !phone.equals('')">
+            and ut.phone like concat("%", #{phone}, "%")
+        </if>
     </select>
 </mapper>

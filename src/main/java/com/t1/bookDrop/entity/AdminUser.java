@@ -28,10 +28,6 @@ public class AdminUser {
                 .name(name)
                 .email(email)
                 .phone(phone)
-                .address(address)
-                .gender(gender)
-                .birth(birth)
-                .overdue(overdue)
                 .build();
     }
 }
