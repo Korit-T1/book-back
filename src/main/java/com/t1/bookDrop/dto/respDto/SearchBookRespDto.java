@@ -20,4 +20,5 @@ public class SearchBookRespDto {
     private String coverImgUrl; 
     private LocalDateTime publishDate;
     private float averageRating;
+    private int reviewCount;
 }

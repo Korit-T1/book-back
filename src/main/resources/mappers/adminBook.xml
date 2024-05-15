@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.t1.bookDrop.repository.AdminBookMapper">
+
+    <resultMap id="CategoryResultMap" type="com.t1.bookDrop.entity.Category">
+        <id property="categoryId" column="category_id"/>
+        <result property="categoryName" column="category_name"/>
+    </resultMap>
+
+    <resultMap id="BookResultMap" type="com.t1.bookDrop.entity.AdminBook">
+        <id property="bookId" column="book_id" />
+        <result property="isbn" column="isbn"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="bookName" column="book_name"/>
+        <result property="authorName" column="author_name"/>
+        <result property="publisherName" column="publisher_name"/>
+        <result property="coverImgUrl" column="cover_img_url"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date" />
+        <result property="publishDate" column="publish_date" />
+        <association property="category" resultMap="CategoryResultMap"/>
+    </resultMap>
+    <insert id="saveBook" parameterType="com.t1.bookDrop.entity.AdminBook">
+        insert into book_tb
+        values(
+            0,
+            #{isbn},
+            #{categoryId},
+            #{bookName},
+            #{authorName},
+            #{publisherName},
+            #{coverImgUrl},
+            now(),
+            now(),
+            #{publishDate}
+    </insert>
+</mapper>
