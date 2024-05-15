@@ -23,7 +23,8 @@ public class PermitAllFilter extends GenericFilter {
                 "/oauth2",
                 "/books",
                 "/search",
-                "/admin/getNotice"
+                "/admin/getNotice",
+                "/reviews"
         );
 
         String uri = request.getRequestURI();

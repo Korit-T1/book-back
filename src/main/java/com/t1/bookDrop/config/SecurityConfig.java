@@ -52,7 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/admin/**",
                         "/boardList**",
                         "/searchUserInfo/**"
-                )
+                        "/reviews/**")
+
                 .permitAll()
                 .anyRequest()
                 .authenticated()
