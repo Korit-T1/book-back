@@ -21,12 +21,8 @@ public class PermitAllFilter extends GenericFilter {
                 "/error",
                 "/auth",
                 "/oauth2",
-                "/books/**",
-                "/search/**",
-                "/searchUserInfo",
-                "/admin/getNotice",
-                "/account/passwords",
-                "/reviews/**"
+                "/books",
+                "/search"
         );
 
         String uri = request.getRequestURI();
