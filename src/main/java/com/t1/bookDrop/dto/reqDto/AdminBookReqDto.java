@@ -3,6 +3,7 @@ package com.t1.bookDrop.dto.reqDto;
 import com.t1.bookDrop.entity.AdminBook;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,7 +18,7 @@ public class AdminBookReqDto {
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-    private LocalDateTime publishDate;
+    private LocalDate publishDate;
 
     public AdminBook toEntity() {
         return AdminBook.builder()

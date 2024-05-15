@@ -71,7 +71,13 @@
             1
         )
     </insert>
-
+    <select id="getCategory" resultMap="CategoryResultMap">
+        select
+            ct.category_id,
+            ct.category_name
+        from
+            category_tb ct
+    </select>
     <select id="getBook" resultMap="BookResultMap"> <!-- 기능 확인 -->
         select
             bt.book_id,

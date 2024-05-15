@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -22,7 +23,7 @@ public class AdminBook {
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-    private LocalDateTime publishDate;
+    private LocalDate publishDate;
 
     private Category category;
 

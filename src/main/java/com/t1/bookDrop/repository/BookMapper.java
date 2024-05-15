@@ -2,6 +2,7 @@ package com.t1.bookDrop.repository;
 
 import com.t1.bookDrop.entity.Book;
 import com.t1.bookDrop.entity.BookStock;
+import com.t1.bookDrop.entity.Category;
 import com.t1.bookDrop.entity.Loan;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -35,6 +36,7 @@ public interface BookMapper {
     public int updateBookByBookId(Book book);
 
     public int updateReturnDate(int loanId);
+    public List<Category> getCategory();
 
     public List<BookStock> findBookStocksByBookId(int bookId);
 
