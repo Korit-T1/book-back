@@ -14,7 +14,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping()
 public class ReviewController {
 
     @Autowired
@@ -27,12 +26,12 @@ public class ReviewController {
         return ResponseEntity.created(null).body(true);
     }
 
-    @GetMapping("/getReview")
+    @GetMapping("/reviews")
     public ResponseEntity<List<ReviewRespDto>> findReviews(FindReviewReqDto findReviewReqDto){
         return ResponseEntity.ok(reviewService.getReview(findReviewReqDto));
     }
 
-    @GetMapping("/review/count")
+    @GetMapping("/reviews/count")
     public ResponseEntity<?> findReviewCount(FindReviewReqDto findReviewReqDto){
         return ResponseEntity.ok(reviewService.getReviewCount(findReviewReqDto));
     }
