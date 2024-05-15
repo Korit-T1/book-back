@@ -36,5 +36,6 @@
             now(),
             now(),
             #{publishDate}
+        )
     </insert>
 </mapper>

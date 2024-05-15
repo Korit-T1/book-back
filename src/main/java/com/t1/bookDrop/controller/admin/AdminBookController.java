@@ -33,6 +33,12 @@ public class AdminBookController {
         return ResponseEntity.created(null).body(true);
     }
 
+    @GetMapping("/getCategory")
+    public ResponseEntity<?> getCategory() {
+        return ResponseEntity.ok(adminBookService.getCategories());
+    }
+
+
 
     @DeleteMapping("/book")
     public  ResponseEntity<?> deleteBook(@RequestBody List<Integer> bookIds) {

@@ -3,6 +3,7 @@ package com.t1.bookDrop.dto.respDto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 //import java.time.LocalDateTime;
@@ -18,7 +19,7 @@ public class SearchBookRespDto {
     private String authorName;
     private String publisherName;
     private String coverImgUrl; 
-    private LocalDateTime publishDate;
+    private LocalDate publishDate;
     private float averageRating;
     private int reviewCount;
 }
