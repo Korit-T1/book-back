@@ -60,10 +60,6 @@ public class AccountService {
             throw new ValidException(Map.of("userInfo", "회원 정보가 없습니다."));
         }
 
-        if (!editPasswordReqDto.getNewPassword().equals(editPasswordReqDto.getNewPasswordCheck())) {
-            throw new ValidException(Map.of("newPasswordCheck", "비밀번호 불일치\n다시 입력 바랍니다."));
-        }
-
         // 비밀번호 업데이트
         user.setPassword(passwordEncoder.encode(editPasswordReqDto.getNewPassword()));
 

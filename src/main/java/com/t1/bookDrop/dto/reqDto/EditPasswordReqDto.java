@@ -16,6 +16,5 @@ public class EditPasswordReqDto {
             message = "영문, 특문, 숫자를 포함한 8 ~ 128자리 형식이어야 합니다.")
     private String newPassword;
 
-    @NotBlank
     private String newPasswordCheck;
 }
