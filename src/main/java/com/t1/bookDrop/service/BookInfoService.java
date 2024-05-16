@@ -66,6 +66,7 @@ public class BookInfoService {
 
     public List<SearchBookRespDto> getPopularBooks() {
         List<Book> list = bookMapper.getPopularBooks();
+        System.out.println(list);
         return list.stream().map(Book::toSearchBookRespDto).collect(Collectors.toList());
     }
 

@@ -93,7 +93,7 @@ public class JwtProvider {
     public Authentication getAuthentication(Claims claims) {
         String username = claims.get("username").toString();
 
-        if(username.contains("admin")) {
+        if(username.equals("admin")) {
             Admin admin = adminMapper.adminCheckByUsername(username);
 
             if (admin == null) return null;
