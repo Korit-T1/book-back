@@ -71,8 +71,31 @@
         where
             ut.user_id = #{userid}
             and lt.return_date is null
+            <if test="filter == 1"></if>
+            <if test="filter == 2">
+                and lt.due_date > now()
+            </if>
+            <if test="filter == 3">
+                and lt.due_date > now()
+            </if>
+            <if test="filter == 4">
+                and now() > lt.due_date
+            </if>
         order by
-            lt.due_date
+            <choose>
+                <when test="filter == 1">
+                    lt.book_stock_id
+                </when>
+                <when test="filter == 2">
+                    lt.due_date - now()
+                </when>
+                <when test="filter == 3">
+                    now() - lt.due_date
+                </when>
+                <otherwise>
+                    lt.loan_id
+                </otherwise>
+            </choose>
         limit
             #{index}, 6;
     </select>
@@ -82,11 +105,22 @@
             count(*)
         from
             loan_tb lt
+            left outer join user_tb ut on (ut.user_id = lt.user_id)
             left outer join book_stock_tb bst on(bst.book_stock_id = lt.book_stock_id)
             left outer join book_tb bt on(bt.book_id = bst.book_id)
         where
-            user_id = #{userid}
-            and lt.return_date is null;
+            ut.user_id = #{userid}
+            and lt.return_date is null
+            <if test="filter == 1"></if>
+            <if test="filter == 2">
+                and lt.due_date > now()
+            </if>
+            <if test="filter == 3">
+                and lt.due_date > now()
+            </if>
+            <if test="filter == 4">
+                and now() > lt.due_date
+            </if>
     </select>
 
     <select id="getReturnedBooks" parameterType="int" resultMap="loanResultMap">
@@ -118,7 +152,7 @@
         order by
             <choose>
                 <when test="filter == 1">
-                    lt.return_date DESC
+                    lt.book_stock_id
                 </when>
                 <when test="filter == 2">
                     lt.return_date

@@ -164,7 +164,8 @@
 <!--                    -->
 <!--                </otherwise>-->
             </choose>
-        limit #{index}, 20
+        limit
+            #{index}, 20
     </select>
 
     <select id="getBookCount" resultType="integer">
@@ -258,17 +259,28 @@
         select
             bt.book_id,
             bt.isbn,
-            ct.category_name,
             bt.book_name,
             bt.author_name,
             bt.publisher_name,
             bt.cover_img_url,
             bt.create_date,
             bt.update_date,
-            bt.publish_date
+            bt.publish_date,
+            ct.category_name,
+            temp_rating_tb.average_rating,
+            temp_rating_tb.review_count
         from
             book_tb bt
             left outer join category_tb ct on(ct.category_id = bt.category_id)
+            left outer join (
+                select
+                    book_id,
+                    avg(rating) as average_rating,
+                    count(book_id) as review_count
+                from
+                    review_tb
+                group by
+                    book_id) temp_rating_tb on(temp_rating_tb.book_id = bt.book_id)
         ORDER BY
             book_name DESC
         LIMIT 5;
@@ -276,68 +288,64 @@
 
     <select id="getTopFiveBooks" resultMap="BookResultMap">
         select
-            bt.book_id,
-            bt.isbn,
-            ct.category_name,
-            bt.book_name,
-            bt.author_name,
-            bt.publisher_name,
-            bt.cover_img_url,
-            bt.create_date,
-            bt.update_date,
-            bt.publish_date
+        bt.book_id,
+        bt.isbn,
+        bt.book_name,
+        bt.author_name,
+        bt.publisher_name,
+        bt.cover_img_url,
+        bt.create_date,
+        bt.update_date,
+        bt.publish_date,
+        ct.category_name,
+        temp_rating_tb.average_rating,
+        temp_rating_tb.review_count
         from
-            book_tb bt
-            left outer join category_tb ct on(ct.category_id = bt.category_id)
+        book_tb bt
+        left outer join category_tb ct on(ct.category_id = bt.category_id)
+        left outer join (
+        select
+        book_id,
+        avg(rating) as average_rating,
+        count(book_id) as review_count
+        from
+        review_tb
+        group by
+        book_id) temp_rating_tb on(temp_rating_tb.book_id = bt.book_id)
         ORDER BY
             RAND()
         LIMIT 5;
     </select>
 
     <select id="getNewBooks" resultMap="BookResultMap">
-        SELECT
-            bt.book_id,
-            bt.isbn,
-            ct.category_name,
-            bt.book_name,
-            bt.author_name,
-            bt.publisher_name,
-            bt.cover_img_url,
-            bt.create_date,
-            bt.update_date,
-            bt.publish_date
-        FROM
-            book_tb bt
-            left outer join category_tb ct on(ct.category_id = bt.category_id)
+        select
+        bt.book_id,
+        bt.isbn,
+        bt.book_name,
+        bt.author_name,
+        bt.publisher_name,
+        bt.cover_img_url,
+        bt.create_date,
+        bt.update_date,
+        bt.publish_date,
+        ct.category_name,
+        temp_rating_tb.average_rating,
+        temp_rating_tb.review_count
+        from
+        book_tb bt
+        left outer join category_tb ct on(ct.category_id = bt.category_id)
+        left outer join (
+        select
+        book_id,
+        avg(rating) as average_rating,
+        count(book_id) as review_count
+        from
+        review_tb
+        group by
+        book_id) temp_rating_tb on(temp_rating_tb.book_id = bt.book_id)
         ORDER BY
             bt.publish_date DESC,
             TIME(bt.publish_date) DESC
         LIMIT 10;
     </select>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </mapper>

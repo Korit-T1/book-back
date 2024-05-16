@@ -14,12 +14,12 @@ public interface MyPageMapper {
     public List<Loan> getReadingBooks(
             @Param("index") int index,
             @Param("userid") int userid,
-            @Param("option") int option
+            @Param("filter") int filter
     );
 
     public int getReadingBooksCount(
             @Param("userid") int userid,
-            @Param("option") int option
+            @Param("filter") int filter
     );
 
     public List<Loan> getReturnedBooks(
