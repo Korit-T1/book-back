@@ -15,12 +15,12 @@ public class AdminUserController {
     private AdminUserService adminUserService;
 
     @GetMapping("/adminUser")
-    public ResponseEntity<?> getUser(@RequestBody AdminUserReqDto adminUserReqDto) {
+    public ResponseEntity<?> getUser(AdminUserReqDto adminUserReqDto) {
         return ResponseEntity.ok(adminUserService.getUsers(adminUserReqDto));
     }
 
     @GetMapping("/findUser")
-    public ResponseEntity<?> findUser(@RequestBody AdminUserReqDto adminUserReqDto) {
+    public ResponseEntity<?> findUser(AdminUserReqDto adminUserReqDto) {
         return ResponseEntity.ok(adminUserService.findUser(adminUserReqDto));
     }
 }
