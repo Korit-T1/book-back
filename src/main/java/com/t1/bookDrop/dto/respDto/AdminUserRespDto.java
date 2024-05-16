@@ -9,6 +9,11 @@ public class AdminUserRespDto {
     private int userId;
     private String username;
     private String name;
+    private String gender;
     private String email;
+    private int age;
+    private String address;
     private String phone;
+    private String birth;
+    private int overdue;
 }

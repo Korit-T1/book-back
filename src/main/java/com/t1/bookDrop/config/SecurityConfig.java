@@ -53,7 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/boardList**",
                         "/searchUserInfo/**"
                         "/reviews/**")
-
                 .permitAll()
                 .anyRequest()
                 .authenticated()
