@@ -1,5 +1,6 @@
 package com.t1.bookDrop.entity;
 
+import com.t1.bookDrop.dto.reqDto.MostLoanedRespDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

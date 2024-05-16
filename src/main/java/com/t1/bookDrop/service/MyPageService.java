@@ -1,5 +1,6 @@
 package com.t1.bookDrop.service;
 
+import com.t1.bookDrop.dto.reqDto.MostLoanedRespDto;
 import com.t1.bookDrop.dto.reqDto.MyBookReqDto;
 import com.t1.bookDrop.dto.reqDto.UpdateProfileImageReqDto;
 import com.t1.bookDrop.dto.respDto.mypage.LoanHistoryRespDto;
@@ -27,7 +28,6 @@ public class MyPageService {
         FavoriteCategory favoriteCategory = myPageMapper.getFavoriteInfo(userid);
         MostLoanedBook mostLoanedBook = myPageMapper.getMostLoanedInfo(userid);
 
-        System.out.println(favoriteCategory);
         return SummaryRespDto.builder()
                 .overdue(myPageMapper.getOverdueCount(userid))
                 .reading(myPageMapper.getReadingCount(userid))
@@ -35,6 +35,10 @@ public class MyPageService {
                 .favoriteCategoryName(favoriteCategory.getName())
                 .favoriteCategoryCount(favoriteCategory.getCount())
                 .build();
+    }
+
+    public MostLoanedBook getMostLoaned(int userid) {
+        return myPageMapper.getMostLoanedInfo(userid);
     }
 
 
