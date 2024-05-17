@@ -48,10 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/server/**",
                         "/auth/**",
                         "/books/**",
-                        "/search",
+                        "/search/**",
                         "/admin/**",
                         "/boardList**",
                         "/searchUserInfo/**",
+                        "/reviews/**",
+                        "/findUser",
+                        "/account/passwords",
                         "/reviews/**")
                 .permitAll()
                 .anyRequest()
