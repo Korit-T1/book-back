@@ -56,6 +56,13 @@ public class MyPageController {
         return ResponseEntity.ok().body(mypageService.getSummaryInfo(userid));
     }
 
+    @GetMapping("/most")
+    public ResponseEntity<?> getMostLoaned(int userid) {
+        return ResponseEntity.ok().body(mypageService.getMostLoaned(userid));
+    }
+
+
+
 
 
 

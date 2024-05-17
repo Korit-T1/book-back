@@ -38,14 +38,11 @@ public class AdminBookController {
         return ResponseEntity.ok(adminBookService.getCategories());
     }
 
-
-
     @DeleteMapping("/book")
     public  ResponseEntity<?> deleteBook(@RequestBody List<Integer> bookIds) {
         bookInfoService.deleteBook(bookIds);
         return ResponseEntity.ok(true);
     }
-
 
     @ParamsPrintAspect
     @PutMapping("/book/{bookId}")

@@ -14,10 +14,11 @@ public class AdminUser {
     private int userId;
     private String username;
     private String name;
+    private String gender;
     private String email;
     private String phone;
+    private int age;
     private String address;
-    private String gender;
     private String birth;
     private int overdue;
 
@@ -26,8 +27,13 @@ public class AdminUser {
                 .userId(userId)
                 .username(username)
                 .name(name)
+                .gender(gender)
                 .email(email)
                 .phone(phone)
+                .age(age)
+                .address(address)
+                .birth(birth)
+                .overdue(overdue)
                 .build();
     }
 }
